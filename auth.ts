@@ -84,6 +84,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           token.authProvider = dbUser.authProvider;
           token.organizationId = dbUser.organizationId;
         }
+      } else if (!token.organizationId) {
+        const [dbUser] = await db
+          .select()
+          .from(users)
+          .where(eq(users.id, token.id as string));
+        if (dbUser && dbUser.organizationId) {
+          token.organizationId = dbUser.organizationId;
+        }
       }
       return token;
     },

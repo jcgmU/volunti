@@ -50,7 +50,7 @@ export async function signUpAction(formData: FormData) {
     await signIn('credentials', {
       email: parsed.data.email,
       password: parsed.data.password,
-      redirectTo: '/app',
+      redirectTo: '/onboarding',
     });
   } catch (error) {
     if (isRedirectError(error)) {
@@ -65,11 +65,29 @@ export async function loginAction(formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
+  let existingUser;
+  try {
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email));
+    existingUser = user;
+  } catch (error) {
+    console.error('Error querying user on login:', error);
+    redirect('/login?error=unknown');
+  }
+
+  if (!existingUser) {
+    redirect('/login?error=invalid');
+  }
+
+  const redirectTo = existingUser.organizationId ? '/app' : '/onboarding';
+
   try {
     await signIn('credentials', {
       email,
       password,
-      redirectTo: '/app',
+      redirectTo,
     });
   } catch (error) {
     if (isRedirectError(error)) {
