@@ -7,10 +7,10 @@
 
 ## Regla de tooling
 
-### Vercel → solo el orquestador, vía MCP oficial
-Todo lo relacionado con Vercel (env vars, deployments, gestión del proyecto) lo maneja el orquestador directamente a través del MCP oficial de Vercel (mcp.vercel.com). Nunca se usa `vercel` CLI para esto ni se le pide a Cami que entre al dashboard.
+### Vercel → solo el orquestador (MCP oficial o CLI global)
+Todo lo relacionado con Vercel (env vars, deployments, gestión del proyecto) lo maneja el orquestador, por la vía que sea más práctica para cada caso: el MCP oficial de Vercel (mcp.vercel.com) o la CLI global de Vercel (vercel@global, ya instalada y autenticada con la cuenta jcgmu). Nunca se le pide a Cami que entre al dashboard.
 
-**Excepción aprobada por Cami:** agy puede usar `vercel link` y `vercel env pull .env.local` localmente para obtener el `DATABASE_URL` real, porque el MCP de Vercel no expone valores de env vars por diseño. Es la única razón válida para tocar `vercel` CLI.
+**Excepción aprobada por Cami:** agy puede usar `vercel link` y `vercel env pull .env.local` localmente para obtener el `DATABASE_URL` real, porque el MCP de Vercel no expone valores de env vars por diseño. Es la única razón válida para que agy toque `vercel` CLI.
 
 ### Todo lo demás → CLI directo (agy)
 `gh`, `npm`, `git`, `drizzle-kit` y cualquier herramienta no-Vercel los ejecuta agy directo por CLI.
