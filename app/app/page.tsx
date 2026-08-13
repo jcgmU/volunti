@@ -7,7 +7,7 @@ import { p2pProfiles } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 
 interface PageProps {
-  searchParams: Promise<{ onboarded?: string }>
+  searchParams: Promise<{ onboarded?: string, error?: string }>
 }
 
 export default async function AppPage({ searchParams }: PageProps) {
@@ -26,6 +26,7 @@ export default async function AppPage({ searchParams }: PageProps) {
   const params = await searchParams
   const showOnboardedSuccess = params.onboarded === '1'
   const showOnboardingBanner = session.user.organizationId === null && !hasP2pProfile
+  const showBlockedBanner = params.error === 'blocked'
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 px-4 text-center">
@@ -35,6 +36,14 @@ export default async function AppPage({ searchParams }: PageProps) {
         {showOnboardedSuccess && (
           <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg p-4 text-sm w-full mb-6 text-left font-medium">
             ¡Perfil creado! Te damos la bienvenida a Volunti.
+          </div>
+        )}
+
+        {/* Banner de Perfil Bloqueado */}
+        {showBlockedBanner && (
+          <div className="bg-destructive/10 border border-destructive/20 text-destructive rounded-lg p-4 text-sm w-full mb-6 text-left">
+            <p className="font-semibold">Perfil bloqueado</p>
+            <p className="mt-0.5">Tu perfil fue bloqueado por incumplir las normas de la comunidad. Si creés que es un error, contactanos.</p>
           </div>
         )}
 

@@ -16,13 +16,17 @@ export async function createRequestAction(offerId: string, message?: string) {
   const requesterId = session.user.id
 
   const [profile] = await db
-    .select({ id: p2pProfiles.id })
+    .select({ id: p2pProfiles.id, isBlocked: p2pProfiles.isBlocked })
     .from(p2pProfiles)
     .where(eq(p2pProfiles.userId, requesterId))
     .limit(1)
 
   if (!profile) {
     redirect('/onboarding/p2p')
+  }
+
+  if (profile.isBlocked) {
+    return { error: 'Tu perfil está bloqueado. No podés realizar esta acción.' }
   }
 
   try {

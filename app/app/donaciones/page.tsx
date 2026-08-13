@@ -42,13 +42,17 @@ export default async function DonacionesPage({ searchParams }: PageProps) {
   const userId = session.user.id
 
   const [profile] = await db
-    .select({ id: p2pProfiles.id })
+    .select({ id: p2pProfiles.id, isBlocked: p2pProfiles.isBlocked })
     .from(p2pProfiles)
     .where(eq(p2pProfiles.userId, userId))
     .limit(1)
 
   if (!profile) {
     redirect('/onboarding/p2p')
+  }
+
+  if (profile.isBlocked) {
+    redirect('/app?error=blocked')
   }
 
   const params = await searchParams

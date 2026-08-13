@@ -5,6 +5,7 @@ import { auth } from '@/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { RequestButton } from './components/request-button'
+import { ReportButton } from './components/report-button'
 import { Button } from '@/components/ui/button'
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -75,6 +76,8 @@ export default async function OfertasPage({ searchParams }: PageProps) {
       photoUrl: p2pOffers.photoUrl,
       alias: p2pProfiles.alias,
       avatarUrl: p2pProfiles.avatarUrl,
+      donorId: p2pOffers.donorId,
+      donorProfileId: p2pProfiles.id,
       createdAt: p2pOffers.createdAt
     })
     .from(p2pOffers)
@@ -227,12 +230,20 @@ export default async function OfertasPage({ searchParams }: PageProps) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs text-muted-foreground leading-tight">Ofrecido por</p>
-                      <p className="text-sm font-semibold truncate leading-tight">{offer.alias || 'Usuario Anónimo'}</p>
+                      <div className="flex items-center gap-1">
+                        <p className="text-sm font-semibold truncate leading-tight">{offer.alias || 'Usuario Anónimo'}</p>
+                        {sessionState === 'ready' && offer.donorProfileId && (
+                          <ReportButton targetType="profile" targetId={offer.donorProfileId} iconOnly />
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-4">
+                  <div className="mt-4 pt-4 flex items-center justify-between gap-2">
                     <RequestButton offerId={offer.id} sessionState={sessionState} />
+                    {sessionState === 'ready' && (
+                      <ReportButton targetType="offer" targetId={offer.id} iconOnly />
+                    )}
                   </div>
                 </div>
 

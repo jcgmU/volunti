@@ -26,13 +26,17 @@ async function getSessionOrRedirect() {
   }
 
   const [profile] = await db
-    .select({ id: p2pProfiles.id })
+    .select({ id: p2pProfiles.id, isBlocked: p2pProfiles.isBlocked })
     .from(p2pProfiles)
     .where(eq(p2pProfiles.userId, session.user.id))
     .limit(1)
 
   if (!profile) {
     redirect('/onboarding/p2p')
+  }
+
+  if (profile.isBlocked) {
+    redirect('/app?error=blocked')
   }
 
   return session

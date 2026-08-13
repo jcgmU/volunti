@@ -33,13 +33,17 @@ export default async function SolicitudesRecibidasPage() {
   const donorId = session.user.id
 
   const [profile] = await db
-    .select({ id: p2pProfiles.id })
+    .select({ id: p2pProfiles.id, isBlocked: p2pProfiles.isBlocked })
     .from(p2pProfiles)
     .where(eq(p2pProfiles.userId, donorId))
     .limit(1)
 
   if (!profile) {
     redirect('/onboarding/p2p')
+  }
+
+  if (profile.isBlocked) {
+    redirect('/app?error=blocked')
   }
 
   // Get all requests for offers owned by this donor
