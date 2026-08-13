@@ -64,7 +64,7 @@ export function AppNav({ userName, orgName }: AppNavProps) {
       </aside>
 
       {/* MOBILE BOTTOM NAV */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full h-16 border-t bg-background/95 backdrop-blur z-40 flex items-center justify-around px-2 pb-safe">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full h-[calc(4rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] border-t bg-background/95 backdrop-blur z-40 flex items-center justify-around px-2">
         {navItems.map((item) => {
           const isActive = pathname === item.href
           return (
