@@ -2,6 +2,8 @@ import { config } from 'dotenv';
 config({ path: '.env.local' });
 import { and, eq } from 'drizzle-orm';
 
+const notesText = 'Prioridad ajustada según OCHA Colombia (ReliefWeb, Flash Update 004, 12 ago 2026) y balance oficial UNGRD (El Tiempo, 13 ago 2026). Cifras exactas de afectados varían entre fuentes y no están cargadas -- pendiente de fuente oficial única antes de cuantificar.';
+
 const data = [
   {
     name: 'Cali',
@@ -9,9 +11,9 @@ const data = [
     department: 'Valle del Cauca',
     lat: 3.4516,
     lng: -76.5320,
-    priorityLevel: 'amarillo' as const,
+    priorityLevel: 'rojo' as const,
     estimatedAffected: 0,
-    notes: 'Pendiente de actualizar con datos reales de campo',
+    notes: notesText,
   },
   {
     name: 'Pereira',
@@ -19,9 +21,9 @@ const data = [
     department: 'Risaralda',
     lat: 4.8133,
     lng: -75.6961,
-    priorityLevel: 'amarillo' as const,
+    priorityLevel: 'rojo' as const,
     estimatedAffected: 0,
-    notes: 'Pendiente de actualizar con datos reales de campo',
+    notes: notesText,
   },
   {
     name: 'Quibdó',
@@ -29,9 +31,9 @@ const data = [
     department: 'Chocó',
     lat: 5.6923,
     lng: -76.6582,
-    priorityLevel: 'amarillo' as const,
+    priorityLevel: 'rojo' as const,
     estimatedAffected: 0,
-    notes: 'Pendiente de actualizar con datos reales de campo',
+    notes: notesText,
   },
   {
     name: 'Manizales',
@@ -39,9 +41,9 @@ const data = [
     department: 'Caldas',
     lat: 5.0689,
     lng: -75.5174,
-    priorityLevel: 'amarillo' as const,
+    priorityLevel: 'rojo' as const,
     estimatedAffected: 0,
-    notes: 'Pendiente de actualizar con datos reales de campo',
+    notes: notesText,
   },
   {
     name: 'Armenia',
@@ -51,7 +53,7 @@ const data = [
     lng: -75.6811,
     priorityLevel: 'amarillo' as const,
     estimatedAffected: 0,
-    notes: 'Pendiente de actualizar con datos reales de campo',
+    notes: notesText,
   },
 ];
 
@@ -70,7 +72,11 @@ async function seed() {
       await db.insert(populations).values(item);
       console.log(`Inserted population: ${item.name}`);
     } else {
-      console.log(`Skipped population (already exists): ${item.name}`);
+      await db
+        .update(populations)
+        .set(item)
+        .where(eq(populations.id, existing[0].id));
+      console.log(`Updated population (already existed): ${item.name}`);
     }
   }
   console.log('Seed finished successfully.');
