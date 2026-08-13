@@ -110,11 +110,18 @@ export default async function DonacionesPage({ searchParams }: PageProps) {
             Gestioná la ayuda humanitaria que estás ofreciendo.
           </p>
         </div>
-        <Link href="/app/donaciones?action=new" passHref>
-          <Button size="lg" className="h-12 text-base font-semibold w-full sm:w-auto px-6">
-            Publicar donación
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <Link href="/app/donaciones/solicitudes" passHref>
+            <Button variant="secondary" size="lg" className="h-12 text-base font-semibold w-full sm:w-auto px-6">
+              Solicitudes recibidas
+            </Button>
+          </Link>
+          <Link href="/app/donaciones?action=new" passHref>
+            <Button size="lg" className="h-12 text-base font-semibold w-full sm:w-auto px-6">
+              Publicar donación
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {errorMessage && (

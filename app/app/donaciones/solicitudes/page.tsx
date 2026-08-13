@@ -53,8 +53,7 @@ export default async function SolicitudesRecibidasPage() {
       offerCategory: p2pOffers.category,
       offerDescription: p2pOffers.description,
       requesterAlias: p2pProfiles.alias,
-      requesterAvatar: p2pProfiles.avatarUrl,
-      requesterPhone: p2pProfiles.phone
+      requesterAvatar: p2pProfiles.avatarUrl
     })
     .from(p2pRequests)
     .innerJoin(p2pOffers, eq(p2pRequests.offerId, p2pOffers.id))
@@ -135,14 +134,6 @@ export default async function SolicitudesRecibidasPage() {
                     <div className="text-sm pt-1">
                       <span className="font-semibold text-muted-foreground mr-2">Mensaje:</span>
                       <span className="italic text-foreground">&quot;{req.message}&quot;</span>
-                    </div>
-                  )}
-                  
-                  {req.status === 'aceptada' && (
-                    <div className="pt-2 text-sm">
-                      <p className="font-medium text-emerald-700 bg-emerald-50 px-3 py-2 rounded-md border border-emerald-100">
-                        Teléfono del solicitante: <strong>{req.requesterPhone}</strong>
-                      </p>
                     </div>
                   )}
                 </div>
