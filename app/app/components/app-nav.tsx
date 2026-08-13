@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Package, Users, Megaphone, LogOut, Gift } from 'lucide-react'
+import { Home, Package, Users, Megaphone, LogOut, Gift, Inbox } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
 interface AppNavProps {
@@ -26,7 +26,8 @@ export function AppNav({ userName, orgName, userType }: AppNavProps) {
   } else if (userType === 'p2p') {
     navItems = [
       { href: '/app', icon: Home, label: 'Inicio' },
-      { href: '/app/donaciones', icon: Gift, label: 'Mis Donaciones' }
+      { href: '/app/donaciones', icon: Gift, label: 'Mis Donaciones' },
+      { href: '/app/mis-solicitudes', icon: Inbox, label: 'Mis Solicitudes' }
     ]
   } else {
     navItems = [
