@@ -70,3 +70,10 @@ export async function getVolunteers(filters: PanoramaFilters) {
     ))
     .orderBy(asc(volunteers.name))
 }
+
+export async function getPopulations() {
+  return db
+    .select()
+    .from(populations)
+    .orderBy(asc(populations.name))
+}

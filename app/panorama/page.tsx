@@ -15,10 +15,12 @@ import {
   getCitiesForNeeds,
   getCitiesForInventory,
   getCitiesForVolunteers,
-  getSkills
+  getSkills,
+  getPopulations
 } from './lib/queries'
 import { PanoramaTabs } from './components/panorama-tabs'
 import { FilterForm } from './components/filter-form'
+import { MapWrapper } from './components/map-wrapper'
 
 interface PageProps {
   searchParams: Promise<Record<string, string | undefined>>
@@ -44,6 +46,8 @@ export default async function PanoramaPage({ searchParams }: PageProps) {
     items = await getVolunteers(filters)
     cities = await getCitiesForVolunteers()
     skills = await getSkills()
+  } else if (tab === 'mapa') {
+    items = await getPopulations()
   }
 
   const hasActiveFilters = Object.keys(params).some(k => k !== 'tab' && params[k])
@@ -61,9 +65,13 @@ export default async function PanoramaPage({ searchParams }: PageProps) {
       </div>
 
       <PanoramaTabs active={tab} params={filters} />
-      <FilterForm activeTab={tab} currentFilters={filters} cities={cities} skills={skills} />
+      {tab !== 'mapa' && (
+        <FilterForm activeTab={tab} currentFilters={filters} cities={cities} skills={skills} />
+      )}
 
-      {items.length === 0 ? (
+      {tab === 'mapa' ? (
+        <MapWrapper populations={items} />
+      ) : items.length === 0 ? (
         <div className="border border-dashed rounded-xl p-12 text-center max-w-md mx-auto mt-8">
           <p className="text-lg font-semibold text-muted-foreground">No hay resultados para estos filtros.</p>
           {hasActiveFilters && (

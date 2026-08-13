@@ -5,7 +5,8 @@ export function PanoramaTabs({ active, params }: { active: string; params: Panor
   const tabs = [
     { id: 'necesidades', label: 'Necesidades' },
     { id: 'inventario', label: 'Inventario' },
-    { id: 'voluntarios', label: 'Voluntarios' }
+    { id: 'voluntarios', label: 'Voluntarios' },
+    { id: 'mapa', label: 'Mapa' }
   ]
 
   return (
