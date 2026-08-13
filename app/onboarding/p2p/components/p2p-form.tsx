@@ -4,10 +4,12 @@ import { useState, useTransition } from 'react'
 import { createP2PProfile } from '../actions'
 import { Button } from '@/components/ui/button'
 import { AlertCircle } from 'lucide-react'
+import { ImageUpload } from '@/app/components/image-upload'
 
 export function P2PForm() {
   const [error, setError] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
+  const [avatarUrl, setAvatarUrl] = useState('')
 
   async function onSubmit(formData: FormData) {
     setError(null)
@@ -60,17 +62,11 @@ export function P2PForm() {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="avatarUrl" className="text-sm font-semibold">
-            Foto de perfil (URL) <span className="text-muted-foreground font-normal">(Opcional)</span>
+          <label className="text-sm font-semibold">
+            Foto de perfil <span className="text-muted-foreground font-normal">(Opcional)</span>
           </label>
-          <input
-            id="avatarUrl"
-            name="avatarUrl"
-            type="url"
-            className="w-full h-12 px-4 rounded-lg border bg-background"
-            placeholder="https://ejemplo.com/mifoto.jpg"
-          />
-          <p className="text-xs text-muted-foreground">Temporalmente ingresá una URL válida de imagen.</p>
+          <ImageUpload onUploadComplete={setAvatarUrl} />
+          <input type="hidden" name="avatarUrl" value={avatarUrl} />
         </div>
       </div>
 
