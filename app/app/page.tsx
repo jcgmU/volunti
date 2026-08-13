@@ -2,6 +2,9 @@ import { auth, signOut } from '@/auth'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import { db } from '@/db'
+import { p2pProfiles } from '@/db/schema'
+import { eq } from 'drizzle-orm'
 
 interface PageProps {
   searchParams: Promise<{ onboarded?: string }>
@@ -10,13 +13,19 @@ interface PageProps {
 export default async function AppPage({ searchParams }: PageProps) {
   const session = await auth()
 
-  if (!session) {
+  if (!session || !session.user || !session.user.id) {
     redirect('/login')
+  }
+
+  let hasP2pProfile = false;
+  if (!session.user.organizationId) {
+    const [p2p] = await db.select({ id: p2pProfiles.id }).from(p2pProfiles).where(eq(p2pProfiles.userId, session.user.id)).limit(1);
+    hasP2pProfile = !!p2p;
   }
 
   const params = await searchParams
   const showOnboardedSuccess = params.onboarded === '1'
-  const showOnboardingBanner = session.user.organizationId === null
+  const showOnboardingBanner = session.user.organizationId === null && !hasP2pProfile
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 px-4 text-center">
@@ -34,9 +43,9 @@ export default async function AppPage({ searchParams }: PageProps) {
           <div className="bg-amber-50 border border-amber-200 text-amber-900 rounded-lg p-4 text-sm w-full mb-6 text-left flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <p className="font-semibold">Perfil incompleto</p>
-              <p className="text-amber-800 text-xs mt-0.5">Todavía no completaste el perfil de tu fundación.</p>
+              <p className="text-amber-800 text-xs mt-0.5">Todavía no completaste tu perfil ni elegiste un rol.</p>
             </div>
-            <Link href="/onboarding" passHref className="shrink-0">
+            <Link href="/elegir-rol" passHref className="shrink-0">
               <Button size="sm" variant="outline" className="border-amber-300 text-amber-950 hover:bg-amber-100 h-9 px-3">
                 Completar ahora
               </Button>
