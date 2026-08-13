@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/db';
-import { users } from '@/db/schema';
+import { users, p2pProfiles } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { signUpSchema } from '@/lib/validations';
@@ -50,7 +50,7 @@ export async function signUpAction(formData: FormData) {
     await signIn('credentials', {
       email: parsed.data.email,
       password: parsed.data.password,
-      redirectTo: '/onboarding',
+      redirectTo: '/elegir-rol',
     });
   } catch (error) {
     if (isRedirectError(error)) {
@@ -81,7 +81,13 @@ export async function loginAction(formData: FormData) {
     redirect('/login?error=invalid');
   }
 
-  const redirectTo = existingUser.organizationId ? '/app' : '/onboarding';
+  let hasP2pProfile = false;
+  if (!existingUser.organizationId) {
+    const [p2p] = await db.select().from(p2pProfiles).where(eq(p2pProfiles.userId, existingUser.id));
+    hasP2pProfile = !!p2p;
+  }
+
+  const redirectTo = (existingUser.organizationId || hasP2pProfile) ? '/app' : '/elegir-rol';
 
   try {
     await signIn('credentials', {
