@@ -41,3 +41,13 @@ export const inventoryItemSchema = z.object({
   location: z.string().max(200).optional().or(z.literal('')),
   notes: z.string().max(1000).optional().or(z.literal(''))
 })
+
+export const volunteerSchema = z.object({
+  name: z.string().min(2, 'El nombre es obligatorio').max(200),
+  contactPhone: z.string().min(7, 'Ingresá un teléfono de contacto válido').max(30),
+  skills: z.array(z.string()).min(1, 'Ingresá al menos una habilidad'),
+  city: z.string().min(2, 'La ciudad es obligatoria').max(100),
+  availabilityFrom: z.string().min(1, 'Fecha de inicio requerida'),
+  availabilityTo: z.string().min(1, 'Fecha de fin requerida'),
+  status: z.enum(['disponible', 'asignado', 'no_disponible'])
+})
