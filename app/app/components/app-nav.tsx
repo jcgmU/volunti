@@ -2,23 +2,37 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Package, Users, Megaphone, LogOut } from 'lucide-react'
+import { Home, Package, Users, Megaphone, LogOut, Gift } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
 interface AppNavProps {
   userName: string
   orgName?: string
+  userType: 'org' | 'p2p' | 'none'
 }
 
-export function AppNav({ userName, orgName }: AppNavProps) {
+export function AppNav({ userName, orgName, userType }: AppNavProps) {
   const pathname = usePathname()
 
-  const navItems = [
-    { href: '/app', icon: Home, label: 'Inicio' },
-    { href: '/app/inventario', icon: Package, label: 'Inventario' },
-    { href: '/app/voluntarios', icon: Users, label: 'Voluntarios' },
-    { href: '/app/necesidades', icon: Megaphone, label: 'Necesidades' }
-  ]
+  let navItems: { href: string; icon: React.ElementType; label: string }[] = []
+
+  if (userType === 'org') {
+    navItems = [
+      { href: '/app', icon: Home, label: 'Inicio' },
+      { href: '/app/inventario', icon: Package, label: 'Inventario' },
+      { href: '/app/voluntarios', icon: Users, label: 'Voluntarios' },
+      { href: '/app/necesidades', icon: Megaphone, label: 'Necesidades' }
+    ]
+  } else if (userType === 'p2p') {
+    navItems = [
+      { href: '/app', icon: Home, label: 'Inicio' },
+      { href: '/app/donaciones', icon: Gift, label: 'Mis Donaciones' }
+    ]
+  } else {
+    navItems = [
+      { href: '/app', icon: Home, label: 'Inicio' }
+    ]
+  }
 
   return (
     <>
@@ -30,7 +44,7 @@ export function AppNav({ userName, orgName }: AppNavProps) {
 
         <div className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
           {navItems.map((item) => {
-            const isActive = pathname === item.href
+            const isActive = pathname === item.href || (item.href !== '/app' && pathname.startsWith(item.href))
             return (
               <Link
                 key={item.href}
@@ -66,7 +80,7 @@ export function AppNav({ userName, orgName }: AppNavProps) {
       {/* MOBILE BOTTOM NAV */}
       <nav className="md:hidden fixed bottom-0 left-0 w-full h-[calc(4rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] border-t bg-background/95 backdrop-blur z-40 flex items-center justify-around px-2">
         {navItems.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = pathname === item.href || (item.href !== '/app' && pathname.startsWith(item.href))
           return (
             <Link
               key={item.href}
