@@ -47,8 +47,18 @@ export default async function AppPage({ searchParams }: PageProps) {
         <div className="space-y-6 w-full mt-2">
           <h1 className="text-3xl font-bold">¡Hola, {session.user.name}!</h1>
           <p className="text-muted-foreground">
-            Te has autenticado con éxito en Volunti. Tu panel de control principal estará disponible pronto.
+            Te has autenticado con éxito en Volunti.
           </p>
+
+          <div className="grid grid-cols-1 gap-4 pt-2">
+            <Link href="/app/inventario" passHref className="block text-left border rounded-xl p-5 hover:bg-muted/30 transition">
+              <h2 className="font-bold text-lg text-foreground">📦 Mi Inventario</h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Registrá, actualizá y consultá los recursos y suministros disponibles de tu fundación.
+              </p>
+            </Link>
+          </div>
+
           <div className="pt-4">
             <form
               action={async () => {

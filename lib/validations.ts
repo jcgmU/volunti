@@ -31,3 +31,13 @@ export const onboardingSchema = z.object({
   department: z.string().min(2, 'Ingresá el departamento').max(100),
   capacityNotes: z.string().max(1000).optional().or(z.literal(''))
 })
+
+export const inventoryItemSchema = z.object({
+  category: z.enum(['alimentos', 'agua', 'salud', 'vivienda', 'ropa', 'higiene', 'rescate', 'psicosocial', 'educación', 'transporte', 'mano_de_obra']),
+  itemName: z.string().min(1, 'El nombre del artículo es obligatorio').max(200),
+  quantity: z.coerce.number().positive('La cantidad debe ser un número positivo y mayor a 0'),
+  unit: z.string().min(1, 'La unidad de medida es obligatoria').max(50),
+  status: z.enum(['disponible', 'reservado', 'entregado']),
+  location: z.string().max(200).optional().or(z.literal('')),
+  notes: z.string().max(1000).optional().or(z.literal(''))
+})
