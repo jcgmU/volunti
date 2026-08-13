@@ -43,7 +43,7 @@ export default async function AppPage({ searchParams }: PageProps) {
         {showBlockedBanner && (
           <div className="bg-destructive/10 border border-destructive/20 text-destructive rounded-lg p-4 text-sm w-full mb-6 text-left">
             <p className="font-semibold">Perfil bloqueado</p>
-            <p className="mt-0.5">Tu perfil fue bloqueado por incumplir las normas de la comunidad. Si creés que es un error, contactanos.</p>
+            <p className="mt-0.5">Tu perfil fue bloqueado por incumplir las normas de la comunidad. Si crees que es un error, contáctanos.</p>
           </div>
         )}
 
@@ -72,19 +72,19 @@ export default async function AppPage({ searchParams }: PageProps) {
             <Link href="/app/inventario" passHref className="block text-left border rounded-xl p-5 hover:bg-muted/30 transition">
               <h2 className="font-bold text-lg text-foreground">📦 Mi Inventario</h2>
               <p className="text-sm text-muted-foreground mt-1">
-                Registrá, actualizá y consultá los recursos y suministros disponibles de tu fundación.
+                Registra, actualiza y consulta los recursos y suministros disponibles de tu fundación.
               </p>
             </Link>
             <Link href="/app/voluntarios" passHref className="block text-left border rounded-xl p-5 hover:bg-muted/30 transition">
               <h2 className="font-bold text-lg text-foreground">🙋 Mis Voluntarios</h2>
               <p className="text-sm text-muted-foreground mt-1">
-                Gestioná las personas dispuestas a colaborar con tu organización.
+                Gestiona las personas dispuestas a colaborar con tu organización.
               </p>
             </Link>
             <Link href="/app/necesidades" passHref className="block text-left border rounded-xl p-5 hover:bg-muted/30 transition">
               <h2 className="font-bold text-lg text-foreground">📢 Reportar Necesidad</h2>
               <p className="text-sm text-muted-foreground mt-1">
-                Compartí y gestioná los requerimientos críticos de las poblaciones que atendés.
+                Comparte y gestiona los requerimientos críticos de las poblaciones que atiendes.
               </p>
             </Link>
           </div>

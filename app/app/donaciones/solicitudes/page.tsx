@@ -79,7 +79,7 @@ export default async function SolicitudesRecibidasPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Solicitudes Recibidas</h1>
           <p className="text-muted-foreground mt-1">
-            Gestioná las personas que solicitaron tus donaciones.
+            Gestiona las personas que solicitaron tus donaciones.
           </p>
         </div>
         <Link href="/app/donaciones" passHref>

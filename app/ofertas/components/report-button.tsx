@@ -31,7 +31,7 @@ export function ReportButton({ targetType, targetId, label, iconOnly = false }: 
 
   const handleReport = () => {
     if (!reason.trim()) {
-      setError('Por favor, ingresá un motivo.')
+      setError('Por favor, ingresa un motivo.')
       return
     }
 

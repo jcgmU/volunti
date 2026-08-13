@@ -56,7 +56,7 @@ export function OfferForm({ offer }: OfferFormProps) {
       <div>
         <h2 className="text-2xl font-bold">{isEditing ? 'Editar Donación' : 'Publicar Donación'}</h2>
         <p className="text-muted-foreground mt-1 text-sm">
-          {isEditing ? 'Modificá los detalles de tu donación.' : 'Completá los datos de la ayuda que querés ofrecer.'}
+          {isEditing ? 'Modifica los detalles de tu donación.' : 'Completa los datos de la ayuda que quieres ofrecer.'}
         </p>
       </div>
 
@@ -90,7 +90,7 @@ export function OfferForm({ offer }: OfferFormProps) {
             <option value="pausada">Pausada</option>
             <option value="completada">Completada</option>
           </select>
-          <p className="text-xs text-muted-foreground">Podés pausarla si no podés atender en este momento.</p>
+          <p className="text-xs text-muted-foreground">Puedes pausarla si no puedes atender en este momento.</p>
         </div>
 
         <div className="space-y-2 md:col-span-2">

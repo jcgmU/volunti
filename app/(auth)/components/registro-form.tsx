@@ -14,7 +14,7 @@ interface RegistroFormProps {
 
 export function RegistroForm({ error }: RegistroFormProps) {
   const errorMessages: Record<string, string> = {
-    invalid: 'Datos inválidos. Por favor, revisá los campos.',
+    invalid: 'Datos inválidos. Por favor, revisa los campos.',
     email_taken: 'Ya existe una cuenta registrada con este correo electrónico.',
     unknown: 'Algo salió mal. Por favor, intenta de nuevo.',
   };
@@ -26,7 +26,7 @@ export function RegistroForm({ error }: RegistroFormProps) {
       <CardHeader className="space-y-1 text-center sm:text-left">
         <CardTitle className="text-2xl font-bold tracking-tight">Crear una cuenta</CardTitle>
         <CardDescription>
-          Ingresá tus datos para registrarte en Volunti.
+          Ingresa tus datos para registrarte en Volunti.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -73,7 +73,7 @@ export function RegistroForm({ error }: RegistroFormProps) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-center text-sm">
-        <span className="text-muted-foreground mr-1">¿Ya tenés cuenta?</span>
+        <span className="text-muted-foreground mr-1">¿Ya tienes cuenta?</span>
         <Link href="/login" className="font-semibold text-primary hover:underline">
           Iniciá sesión
         </Link>

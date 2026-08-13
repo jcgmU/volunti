@@ -26,7 +26,7 @@ export default async function P2POnboardingPage() {
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">Tu perfil solidario</h1>
           <p className="text-muted-foreground">
-            Completá estos datos mínimos para poder publicar ofertas de donación o contactar con voluntarios.
+            Completa estos datos mínimos para poder publicar ofertas de donación o contactar con voluntarios.
           </p>
         </div>
         

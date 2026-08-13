@@ -14,7 +14,7 @@ interface LoginFormProps {
 
 export function LoginForm({ error }: LoginFormProps) {
   const errorMessages: Record<string, string> = {
-    invalid: 'Credenciales inválidas. Por favor, revisá tu correo y contraseña.',
+    invalid: 'Credenciales inválidas. Por favor, revisa tu correo y contraseña.',
     unknown: 'Algo salió mal. Por favor, intenta de nuevo.',
   };
 
@@ -25,7 +25,7 @@ export function LoginForm({ error }: LoginFormProps) {
       <CardHeader className="space-y-1 text-center sm:text-left">
         <CardTitle className="text-2xl font-bold tracking-tight">Iniciar sesión</CardTitle>
         <CardDescription>
-          Ingresá tus credenciales para acceder a tu panel de Volunti.
+          Ingresa tus credenciales para acceder a tu panel de Volunti.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -68,9 +68,9 @@ export function LoginForm({ error }: LoginFormProps) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-center text-sm">
-        <span className="text-muted-foreground mr-1">¿No tenés cuenta?</span>
+        <span className="text-muted-foreground mr-1">¿No tienes cuenta?</span>
         <Link href="/registro" className="font-semibold text-primary hover:underline">
-          Registrate
+          Regístrate
         </Link>
       </CardFooter>
     </Card>

@@ -29,7 +29,7 @@ export function NeedForm({ item, populationsList }: NeedFormProps) {
         </CardTitle>
         <CardDescription>
           {isEdit
-            ? 'Modificá los detalles de esta necesidad.'
+            ? 'Modifica los detalles de esta necesidad.'
             : 'Agregá un requerimiento urgente para coordinar con otras organizaciones.'}
         </CardDescription>
       </CardHeader>

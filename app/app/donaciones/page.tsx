@@ -62,8 +62,8 @@ export default async function DonacionesPage({ searchParams }: PageProps) {
   const error = params.error
 
   const errorMessages: Record<string, string> = {
-    invalid: 'Datos inválidos o faltantes. Por favor, revisá los campos.',
-    unauthorized: 'No tenés permisos para realizar esta acción.',
+    invalid: 'Datos inválidos o faltantes. Por favor, revisa los campos.',
+    unauthorized: 'No tienes permisos para realizar esta acción.',
     unknown: 'Algo salió mal. Por favor, intenta de nuevo.'
   }
 
@@ -111,7 +111,7 @@ export default async function DonacionesPage({ searchParams }: PageProps) {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Mis Donaciones</h1>
           <p className="text-muted-foreground mt-1">
-            Gestioná la ayuda humanitaria que estás ofreciendo.
+            Gestiona la ayuda humanitaria que estás ofreciendo.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -141,9 +141,9 @@ export default async function DonacionesPage({ searchParams }: PageProps) {
 
       {items.length === 0 ? (
         <div className="border border-dashed rounded-xl p-12 text-center max-w-md mx-auto mt-8">
-          <p className="text-lg font-semibold text-muted-foreground">No tenés donaciones publicadas</p>
+          <p className="text-lg font-semibold text-muted-foreground">No tienes donaciones publicadas</p>
           <p className="text-sm text-muted-foreground mt-1">
-            Publicá tu primera oferta de ayuda para que otras personas o fundaciones puedan solicitarla.
+            Publica tu primera oferta de ayuda para que otras personas o fundaciones puedan solicitarla.
           </p>
           <Link href="/app/donaciones?action=new" passHref className="mt-4 block">
             <Button variant="outline">Comenzar a ayudar</Button>

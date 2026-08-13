@@ -116,7 +116,7 @@ export default async function OfertasPage({ searchParams }: PageProps) {
         <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight">Ofertas de Ayuda (P2P)</h1>
           <p className="text-muted-foreground mt-2 max-w-2xl">
-            Explorá las donaciones y ayudas ofrecidas por personas y organizaciones en todo el país.
+            Explora las donaciones y ayudas ofrecidas por personas y organizaciones en todo el país.
           </p>
         </div>
 

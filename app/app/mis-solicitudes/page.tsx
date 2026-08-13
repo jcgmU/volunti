@@ -97,7 +97,7 @@ export default async function MisSolicitudesPage() {
         <div className="border border-dashed rounded-xl p-12 text-center max-w-md mx-auto mt-8 bg-card">
           <p className="text-lg font-semibold text-muted-foreground">No solicitaste ninguna donación</p>
           <p className="text-sm text-muted-foreground mt-1">
-            Explorá las ofertas de ayuda disponibles y conectate con personas que pueden ayudarte.
+            Explora las ofertas de ayuda disponibles y conéctate con personas que pueden ayudarte.
           </p>
           <Link href="/ofertas" passHref className="mt-4 block">
             <Button variant="outline">Ir a Ofertas</Button>

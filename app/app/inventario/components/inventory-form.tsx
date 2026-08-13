@@ -37,7 +37,7 @@ export function InventoryForm({ item }: InventoryFormProps) {
         </CardTitle>
         <CardDescription>
           {isEdit
-            ? 'Modificá los detalles del artículo existente en tu inventario.'
+            ? 'Modifica los detalles del artículo existente en tu inventario.'
             : 'Agregá un nuevo artículo disponible para la coordinación de ayuda.'}
         </CardDescription>
       </CardHeader>

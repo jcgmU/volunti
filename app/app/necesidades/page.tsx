@@ -36,8 +36,8 @@ export default async function NecesidadesPage({ searchParams }: PageProps) {
   const error = params.error
 
   const errorMessages: Record<string, string> = {
-    invalid: 'Datos inválidos o faltantes. Por favor, revisá los campos.',
-    unauthorized: 'No tenés permisos para realizar esta acción.',
+    invalid: 'Datos inválidos o faltantes. Por favor, revisa los campos.',
+    unauthorized: 'No tienes permisos para realizar esta acción.',
     unknown: 'Algo salió mal. Por favor, intenta de nuevo.'
   }
 
@@ -91,7 +91,7 @@ export default async function NecesidadesPage({ searchParams }: PageProps) {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Mis Necesidades Reportadas</h1>
           <p className="text-muted-foreground mt-1">
-            Gestioná y actualizá los requerimientos urgentes que tu fundación publicó.
+            Gestiona y actualiza los requerimientos urgentes que tu fundación publicó.
           </p>
         </div>
         <Link href="/app/necesidades?action=new" passHref>
@@ -116,7 +116,7 @@ export default async function NecesidadesPage({ searchParams }: PageProps) {
         <div className="border border-dashed rounded-xl p-12 text-center max-w-md mx-auto mt-8">
           <p className="text-lg font-semibold text-muted-foreground">No has reportado necesidades</p>
           <p className="text-sm text-muted-foreground mt-1">
-            Compartí los requerimientos críticos de las comunidades que atendés.
+            Comparte los requerimientos críticos de las comunidades que atiendes.
           </p>
           <Link href="/app/necesidades?action=new" passHref className="mt-4 block">
             <Button variant="outline">Comenzar a reportar</Button>

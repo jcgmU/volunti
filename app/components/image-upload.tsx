@@ -49,7 +49,7 @@ export function ImageUpload({ onUploadComplete, defaultImage }: ImageUploadProps
       onUploadComplete(blob.url)
     } catch (err) {
       console.error(err)
-      setError('Hubo un error al subir la imagen. Intentá de nuevo.')
+      setError('Hubo un error al subir la imagen. Intenta de nuevo.')
       setPreview(defaultImage || null)
     } finally {
       setIsUploading(false)

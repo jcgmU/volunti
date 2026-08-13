@@ -38,7 +38,7 @@ export function OnboardingForm({ error }: OnboardingFormProps) {
   return (
     <Card className="w-full border-none shadow-none sm:border sm:shadow-sm">
       <CardHeader className="space-y-1 text-center sm:text-left">
-        <CardTitle className="text-2xl font-bold tracking-tight">Completá el perfil de tu fundación</CardTitle>
+        <CardTitle className="text-2xl font-bold tracking-tight">Completa el perfil de tu fundación</CardTitle>
         <CardDescription>
           Contanos sobre tu organización para que otras fundaciones puedan encontrarte y coordinar ayuda.
         </CardDescription>

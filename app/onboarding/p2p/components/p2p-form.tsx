@@ -58,7 +58,7 @@ export function P2PForm() {
             className="w-full h-12 px-4 rounded-lg border bg-background"
             placeholder="Ej: 573001234567"
           />
-          <p className="text-xs text-muted-foreground">Incluí el código de país. Solo se compartirá si aceptás una solicitud.</p>
+          <p className="text-xs text-muted-foreground">Incluye el código de país. Solo se compartirá si aceptas una solicitud.</p>
         </div>
 
         <div className="space-y-2">

@@ -26,7 +26,7 @@ export async function createRequestAction(offerId: string, message?: string) {
   }
 
   if (profile.isBlocked) {
-    return { error: 'Tu perfil está bloqueado. No podés realizar esta acción.' }
+    return { error: 'Tu perfil está bloqueado. No puedes realizar esta acción.' }
   }
 
   try {
@@ -46,7 +46,7 @@ export async function createRequestAction(offerId: string, message?: string) {
 
     const count = Number(recentRequests[0]?.count || 0)
     if (count >= 5) {
-      return { error: 'Alcanzaste el límite de 5 solicitudes por día. Probá de nuevo mañana.' }
+      return { error: 'Alcanzaste el límite de 5 solicitudes por día. Prueba de nuevo mañana.' }
     }
 
     // Check anti-duplicate: already a pending request for this offer
@@ -63,7 +63,7 @@ export async function createRequestAction(offerId: string, message?: string) {
       .limit(1)
 
     if (existingRequest) {
-      return { error: 'Ya tenés una solicitud pendiente para esta oferta.' }
+      return { error: 'Ya tienes una solicitud pendiente para esta oferta.' }
     }
 
     // Insert
@@ -80,6 +80,6 @@ export async function createRequestAction(offerId: string, message?: string) {
       throw error
     }
     console.error('DB Insert failed for p2p request:', error)
-    return { error: 'Algo salió mal. Por favor, intentá de nuevo.' }
+    return { error: 'Algo salió mal. Por favor, intenta de nuevo.' }
   }
 }

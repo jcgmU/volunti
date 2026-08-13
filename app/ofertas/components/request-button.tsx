@@ -87,7 +87,7 @@ export function RequestButton({ offerId, sessionState }: RequestButtonProps) {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="w-full p-3 rounded-lg border bg-background min-h-[80px] resize-y text-sm"
-                  placeholder="Escribí un breve mensaje explicando para qué lo necesitás..."
+                  placeholder="Escribe un breve mensaje explicando para qué lo necesitas..."
                   disabled={isPending}
                 />
               </div>

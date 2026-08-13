@@ -24,11 +24,11 @@ export async function reportAction(targetType: 'offer' | 'profile', targetId: st
     .limit(1)
 
   if (!profile) {
-    return { error: 'Necesitás completar tu perfil para realizar esta acción.' }
+    return { error: 'Necesitas completar tu perfil para realizar esta acción.' }
   }
 
   if (profile.isBlocked) {
-    return { error: 'Tu perfil está bloqueado. No podés realizar esta acción.' }
+    return { error: 'Tu perfil está bloqueado. No puedes realizar esta acción.' }
   }
 
   try {
@@ -91,6 +91,6 @@ export async function reportAction(targetType: 'offer' | 'profile', targetId: st
       throw error
     }
     console.error('DB Insert failed for p2p report:', error)
-    return { error: 'Algo salió mal. Por favor, intentá de nuevo.' }
+    return { error: 'Algo salió mal. Por favor, intenta de nuevo.' }
   }
 }

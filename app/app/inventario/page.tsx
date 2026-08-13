@@ -36,8 +36,8 @@ export default async function InventarioPage({ searchParams }: PageProps) {
   const error = params.error
 
   const errorMessages: Record<string, string> = {
-    invalid: 'Datos inválidos o faltantes. Por favor, revisá los campos.',
-    unauthorized: 'No tenés permisos para realizar esta acción.',
+    invalid: 'Datos inválidos o faltantes. Por favor, revisa los campos.',
+    unauthorized: 'No tienes permisos para realizar esta acción.',
     unknown: 'Algo salió mal. Por favor, intenta de nuevo.'
   }
 
@@ -124,7 +124,7 @@ export default async function InventarioPage({ searchParams }: PageProps) {
         <div className="border border-dashed rounded-xl p-12 text-center max-w-md mx-auto mt-8">
           <p className="text-lg font-semibold text-muted-foreground">No hay artículos registrados</p>
           <p className="text-sm text-muted-foreground mt-1">
-            Registrá tus suministros para que puedan ser coordinados en emergencias.
+            Registra tus suministros para que puedan ser coordinados en emergencias.
           </p>
           <Link href="/app/inventario?action=new" passHref className="mt-4 block">
             <Button variant="outline">Comenzar a registrar</Button>
