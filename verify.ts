@@ -1,1 +1,0 @@
-import { loadEnvConfig } from '@next/env'; loadEnvConfig(process.cwd()); import { db } from './db/index'; import { p2pProfiles } from './db/schema'; db.select().from(p2pProfiles).limit(1).then(console.log);

@@ -1,14 +1,14 @@
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 import { db } from '@/db'
-import { organizations } from '@/db/schema'
+import { organizations, p2pProfiles } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { AppNav } from './components/app-nav'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
   
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     redirect('/login')
   }
 
@@ -22,6 +22,16 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     
     if (org.length > 0) {
       orgName = org[0].name
+    }
+  } else {
+    const [p2p] = await db
+      .select({ id: p2pProfiles.id })
+      .from(p2pProfiles)
+      .where(eq(p2pProfiles.userId, session.user.id))
+      .limit(1)
+
+    if (!p2p) {
+      redirect('/elegir-rol')
     }
   }
 
