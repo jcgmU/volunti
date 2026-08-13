@@ -51,3 +51,34 @@ export const volunteerSchema = z.object({
   availabilityTo: z.string().min(1, 'Fecha de fin requerida'),
   status: z.enum(['disponible', 'asignado', 'no_disponible'])
 })
+
+export const needSchema = z.object({
+  populationId: z.string().uuid('Debes seleccionar una población válida').optional().or(z.literal('')),
+  category: z.enum(['alimentos', 'agua', 'salud', 'vivienda', 'ropa', 'higiene', 'rescate', 'psicosocial', 'educación', 'transporte', 'mano_de_obra']),
+  description: z.string().min(1, 'La descripción es obligatoria').max(1000),
+  quantityNeeded: z.coerce.number().positive('La cantidad debe ser mayor a 0'),
+  unit: z.string().min(1, 'La unidad es obligatoria').max(50),
+  urgency: z.enum(['alta', 'media', 'baja']),
+  status: z.enum(['abierta', 'parcial', 'cubierta']),
+  
+  newPopulation: z.boolean().default(false),
+  newPopulationName: z.string().max(200).optional(),
+  newPopulationCity: z.string().max(100).optional(),
+  newPopulationDepartment: z.string().max(100).optional()
+}).superRefine((data, ctx) => {
+  if (data.newPopulation) {
+    if (!data.newPopulationName || data.newPopulationName.length < 2) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Ingresá el nombre de la población', path: ['newPopulationName'] })
+    }
+    if (!data.newPopulationCity || data.newPopulationCity.length < 2) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Ingresá la ciudad', path: ['newPopulationCity'] })
+    }
+    if (!data.newPopulationDepartment || data.newPopulationDepartment.length < 2) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Ingresá el departamento', path: ['newPopulationDepartment'] })
+    }
+  } else {
+    if (!data.populationId) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Seleccioná una población', path: ['populationId'] })
+    }
+  }
+})

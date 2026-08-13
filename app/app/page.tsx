@@ -50,7 +50,7 @@ export default async function AppPage({ searchParams }: PageProps) {
             Te has autenticado con éxito en Volunti.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
             <Link href="/app/inventario" passHref className="block text-left border rounded-xl p-5 hover:bg-muted/30 transition">
               <h2 className="font-bold text-lg text-foreground">📦 Mi Inventario</h2>
               <p className="text-sm text-muted-foreground mt-1">
@@ -61,6 +61,12 @@ export default async function AppPage({ searchParams }: PageProps) {
               <h2 className="font-bold text-lg text-foreground">🙋 Mis Voluntarios</h2>
               <p className="text-sm text-muted-foreground mt-1">
                 Gestioná las personas dispuestas a colaborar con tu organización.
+              </p>
+            </Link>
+            <Link href="/app/necesidades" passHref className="block text-left border rounded-xl p-5 hover:bg-muted/30 transition">
+              <h2 className="font-bold text-lg text-foreground">📢 Reportar Necesidad</h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Compartí y gestioná los requerimientos críticos de las poblaciones que atendés.
               </p>
             </Link>
           </div>
