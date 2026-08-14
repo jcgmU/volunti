@@ -8,7 +8,7 @@ export default function ElegirRolPage() {
         <div className="space-y-3">
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Bienvenido a Volunti</h1>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Para personalizar tu experiencia, contanos cómo vas a usar la plataforma.
+            Para personalizar tu experiencia, cuéntanos cómo vas a usar la plataforma.
           </p>
         </div>
 

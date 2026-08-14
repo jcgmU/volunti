@@ -40,7 +40,7 @@ export function OnboardingForm({ error }: OnboardingFormProps) {
       <CardHeader className="space-y-1 text-center sm:text-left">
         <CardTitle className="text-2xl font-bold tracking-tight">Completa el perfil de tu fundación</CardTitle>
         <CardDescription>
-          Contanos sobre tu organización para que otras fundaciones puedan encontrarte y coordinar ayuda.
+          Cuéntanos sobre tu organización para que otras fundaciones puedan encontrarte y coordinar ayuda.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -64,7 +64,7 @@ export function OnboardingForm({ error }: OnboardingFormProps) {
               <Textarea
                 id="description"
                 name="description"
-                placeholder="Contanos brevemente qué hacen, su misión y cómo ayudan en emergencias..."
+                placeholder="Cuéntanos brevemente qué hacen, su misión y cómo ayudan en emergencias..."
                 rows={4}
                 required
               />

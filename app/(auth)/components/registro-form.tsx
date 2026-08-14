@@ -75,7 +75,7 @@ export function RegistroForm({ error }: RegistroFormProps) {
       <CardFooter className="flex justify-center text-sm">
         <span className="text-muted-foreground mr-1">¿Ya tienes cuenta?</span>
         <Link href="/login" className="font-semibold text-primary hover:underline">
-          Iniciá sesión
+          Inicia sesión
         </Link>
       </CardFooter>
     </Card>

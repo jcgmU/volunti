@@ -119,7 +119,7 @@ export default async function VoluntariosPage({ searchParams }: PageProps) {
         <div className="border border-dashed rounded-xl p-12 text-center max-w-md mx-auto mt-8">
           <p className="text-lg font-semibold text-muted-foreground">No hay voluntarios registrados</p>
           <p className="text-sm text-muted-foreground mt-1">
-            Agregá personas de contacto para coordinar rescates, entregas y logística.
+            Agrega personas de contacto para coordinar rescates, entregas y logística.
           </p>
           <Link href="/app/voluntarios?action=new" passHref className="mt-4 block">
             <Button variant="outline">Comenzar a registrar</Button>

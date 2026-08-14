@@ -23,7 +23,7 @@ export function VolunteerForm({ item }: VolunteerFormProps) {
         <CardDescription>
           {isEdit
             ? 'Modifica los detalles del voluntario existente.'
-            : 'Agregá un nuevo voluntario disponible para coordinar en tus tareas.'}
+            : 'Agrega un nuevo voluntario disponible para coordinar en tus tareas.'}
         </CardDescription>
       </CardHeader>
       <CardContent>
