@@ -1,0 +1,24 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Login — formulario de inicio de sesión carga con Google y credenciales",
+  "planSteps": [
+    { "type": "action", "description": "Navigate directly to /login" },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading with the text 'Iniciar sesión'"
+    },
+    {
+      "type": "assertion",
+      "description": "A button with the text 'Continuar con Google' is visible"
+    },
+    {
+      "type": "assertion",
+      "description": "Form fields for 'Correo electrónico' and 'Contraseña' are visible"
+    },
+    {
+      "type": "assertion",
+      "description": "A link with the text 'Regístrate' is visible, pointing to the registration flow"
+    }
+  ]
+}

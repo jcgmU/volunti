@@ -1,0 +1,24 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Landing — hero y CTAs principales cargan correctamente",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to the homepage at /" },
+    {
+      "type": "assertion",
+      "description": "The page shows the heading text 'Cuando la ayuda se coordina, llega más rápido'"
+    },
+    {
+      "type": "assertion",
+      "description": "A button with the exact text 'Registrar mi fundación' is visible on the page"
+    },
+    {
+      "type": "assertion",
+      "description": "A button with the exact text 'Quiero donar o pedir ayuda' is visible on the page"
+    },
+    {
+      "type": "assertion",
+      "description": "A link with the text 'Ver el panorama en tiempo real' is visible on the page"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Landing — CTA de persona navega a /elegir-rol con dos caminos",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to the homepage at /" },
+    { "type": "action", "description": "Click the button with text 'Quiero donar o pedir ayuda'" },
+    {
+      "type": "assertion",
+      "description": "The browser URL path is exactly /elegir-rol"
+    },
+    {
+      "type": "assertion",
+      "description": "A card or link with the text 'Soy una fundación' is visible"
+    },
+    {
+      "type": "assertion",
+      "description": "A card or link with the text 'Soy voluntario / particular' is visible"
+    }
+  ]
+}

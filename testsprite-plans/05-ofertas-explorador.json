@@ -1,0 +1,24 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Ofertas — explorador público de donaciones P2P carga con filtros",
+  "planSteps": [
+    { "type": "action", "description": "Navigate directly to /ofertas without logging in" },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading with the text 'Ofertas de Ayuda (P2P)'"
+    },
+    {
+      "type": "assertion",
+      "description": "A filter select for 'Ciudad' is visible"
+    },
+    {
+      "type": "assertion",
+      "description": "A filter select for 'Categoría' is visible"
+    },
+    {
+      "type": "assertion",
+      "description": "No phone number of any kind (a sequence of 7 or more digits resembling a telephone number) appears anywhere in the visible page content"
+    }
+  ]
+}

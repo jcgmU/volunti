@@ -1,0 +1,20 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Landing — sección de confianza muestra el aviso legal honesto",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to the homepage at / and scroll to the 'Confianza y seguridad' section" },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading with the text 'Confianza y seguridad'"
+    },
+    {
+      "type": "assertion",
+      "description": "A box titled 'Aviso importante' is visible containing the text 'no verifica la identidad'"
+    },
+    {
+      "type": "assertion",
+      "description": "The text 'Máximo 5 solicitudes por día' is visible on the page"
+    }
+  ]
+}

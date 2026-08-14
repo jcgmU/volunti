@@ -1,0 +1,21 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Footer — atribución de DevIA y navegación pública presentes en toda la plataforma",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to the homepage at / and scroll to the footer" },
+    {
+      "type": "assertion",
+      "description": "The footer contains the text 'Desarrollado por DevIA'"
+    },
+    {
+      "type": "assertion",
+      "description": "The footer contains the text 'sin fines de lucro'"
+    },
+    { "type": "action", "description": "Navigate to /panorama and scroll to the footer" },
+    {
+      "type": "assertion",
+      "description": "The footer on the /panorama page also contains the text 'Desarrollado por DevIA'"
+    }
+  ]
+}
