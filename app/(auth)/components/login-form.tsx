@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { loginAction, signInWithGoogle } from '../actions';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 interface LoginFormProps {
   error?: string;
@@ -15,10 +16,13 @@ interface LoginFormProps {
 export function LoginForm({ error }: LoginFormProps) {
   const errorMessages: Record<string, string> = {
     invalid: 'Credenciales inválidas. Por favor, revisa tu correo y contraseña.',
+    ratelimit: 'Demasiados intentos fallidos. Por favor, intenta de nuevo en unos minutos.',
+    captcha: 'Por favor, completa el CAPTCHA para continuar.',
     unknown: 'Algo salió mal. Por favor, intenta de nuevo.',
   };
 
   const errorMessage = error ? errorMessages[error] || errorMessages.unknown : null;
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   return (
     <Card className="w-full border-none shadow-none sm:border sm:shadow-sm">
@@ -62,6 +66,13 @@ export function LoginForm({ error }: LoginFormProps) {
             <Label htmlFor="password">Contraseña</Label>
             <Input id="password" name="password" type="password" required className="h-12" />
           </div>
+          
+          {turnstileSiteKey && (
+            <div className="flex justify-center my-4">
+              <Turnstile siteKey={turnstileSiteKey} />
+            </div>
+          )}
+
           <Button type="submit" className="w-full h-12 text-base font-semibold mt-2" size="lg">
             Iniciar sesión
           </Button>

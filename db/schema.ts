@@ -120,3 +120,9 @@ export const p2pReports = pgTable('p2p_reports', {
   reason: text('reason').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
+
+export const rateLimits = pgTable('rate_limits', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  key: text('key').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});

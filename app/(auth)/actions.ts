@@ -8,15 +8,28 @@ import { signUpSchema } from '@/lib/validations';
 import { signIn } from '@/auth';
 import { redirect } from 'next/navigation';
 import { isRedirectError } from 'next/dist/client/components/redirect-error';
+import { checkRateLimit, recordRateLimit } from '@/lib/rate-limit';
+import { verifyTurnstileToken } from '@/lib/turnstile';
 
 export async function signUpAction(formData: FormData) {
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
+  const token = formData.get('cf-turnstile-response') as string | null;
+
+  const isHuman = await verifyTurnstileToken(token);
+  if (!isHuman) {
+    redirect('/registro?error=captcha');
+  }
 
   const parsed = signUpSchema.safeParse({ name, email, password });
   if (!parsed.success) {
     redirect('/registro?error=invalid');
+  }
+
+  const rateLimit = await checkRateLimit('signup', 5, 60);
+  if (!rateLimit.success) {
+    redirect('/registro?error=ratelimit');
   }
 
   try {
@@ -64,6 +77,12 @@ export async function signUpAction(formData: FormData) {
 export async function loginAction(formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
+  const token = formData.get('cf-turnstile-response') as string | null;
+
+  const isHuman = await verifyTurnstileToken(token);
+  if (!isHuman) {
+    redirect('/login?error=captcha');
+  }
 
   let existingUser;
   try {
@@ -77,7 +96,13 @@ export async function loginAction(formData: FormData) {
     redirect('/login?error=unknown');
   }
 
+  const rateLimit = await checkRateLimit('login_failed', 10, 15, email, false);
+  if (!rateLimit.success) {
+    redirect('/login?error=ratelimit');
+  }
+
   if (!existingUser) {
+    await recordRateLimit('login_failed', email);
     redirect('/login?error=invalid');
   }
 
@@ -99,6 +124,7 @@ export async function loginAction(formData: FormData) {
     if (isRedirectError(error)) {
       throw error;
     }
+    await recordRateLimit('login_failed', email);
     redirect('/login?error=invalid');
   }
 }
