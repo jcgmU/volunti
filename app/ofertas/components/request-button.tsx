@@ -68,7 +68,7 @@ export function RequestButton({ offerId, sessionState }: RequestButtonProps) {
               <h3 className="text-xl font-bold mb-4">Confirmar Solicitud</h3>
               
               <div className="bg-amber-50 border border-amber-200 text-amber-900 rounded-lg p-4 text-sm mb-6 leading-relaxed">
-                <strong>Aviso Legal:</strong> Volunti facilita el contacto entre personas, pero NO verifica identidad, la necesidad real ni la entrega de la donación. Cada persona es responsable de confirmar por su cuenta antes de coordinar una entrega. Usá el sentido común: preferí lugares públicos, no compartas datos sensibles innecesarios.
+                <strong>Aviso Legal:</strong> Volunti facilita el contacto entre personas, pero NO verifica identidad, la necesidad real ni la entrega de la donación. Cada persona es responsable de confirmar por su cuenta antes de coordinar una entrega. Usa el sentido común: prefiere lugares públicos, no compartas datos sensibles innecesarios.
               </div>
 
               {error && (

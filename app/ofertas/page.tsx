@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { RequestButton } from './components/request-button'
 import { ReportButton } from './components/report-button'
 import { Button } from '@/components/ui/button'
+import { SiteHeader } from '@/components/site-header'
 
 const CATEGORY_LABELS: Record<string, string> = {
   alimentos: 'Alimentos',
@@ -96,21 +97,7 @@ export default async function OfertasPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen bg-muted/20">
       
-      {/* Header Público */}
-      <header className="border-b bg-background sticky top-0 z-30">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="font-bold text-xl tracking-tight">Volunti</Link>
-          <div className="flex items-center gap-4 text-sm font-medium">
-            <Link href="/panorama" className="text-muted-foreground hover:text-foreground transition-colors">Panorama</Link>
-            <Link href="/ofertas" className="text-primary">Ofertas de Ayuda</Link>
-            {session ? (
-              <Link href="/app" className="text-muted-foreground hover:text-foreground transition-colors border rounded-md px-3 py-1.5">Ir a mi panel</Link>
-            ) : (
-              <Link href="/login" className="text-muted-foreground hover:text-foreground transition-colors">Iniciar sesión</Link>
-            )}
-          </div>
-        </div>
-      </header>
+      <SiteHeader active="ofertas" />
 
       <main className="container mx-auto px-4 py-8 max-w-6xl">
         <div className="mb-8">
