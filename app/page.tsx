@@ -292,6 +292,9 @@ export default async function Home() {
             )}
           </div>
         </div>
+        <div className="mx-auto w-full max-w-6xl px-4 mt-4 pt-4 border-t text-center text-sm text-muted-foreground">
+          <p>Desarrollado por DevIA — agencia de desarrollo de software. Proyecto realizado de forma gratuita, sin fines de lucro ni beneficio económico, como aporte a la causa humanitaria.</p>
+        </div>
       </footer>
     </>
   )
