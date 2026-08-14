@@ -12,7 +12,7 @@ export async function SiteHeader({ active }: SiteHeaderProps) {
   return (
     <header className="border-b bg-background sticky top-0 z-30">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="font-bold text-xl tracking-tight">Volunti</Link>
+        <Link href="/" className="font-heading font-bold text-xl tracking-tight">Volunti</Link>
         <div className="flex items-center gap-4 text-sm font-medium">
           <Link 
             href="/panorama" 

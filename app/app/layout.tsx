@@ -42,7 +42,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <>
       <AppNav userName={session.user.name ?? ''} orgName={orgName} userType={userType} />
       <div className="md:hidden border-b px-4 py-3">
-        <span className="text-lg font-semibold">Volunti Panel</span>
+        <span className="font-heading text-lg font-semibold">Volunti Panel</span>
       </div>
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">
         <div className="md:ml-64 pb-20 md:pb-0">{children}</div>

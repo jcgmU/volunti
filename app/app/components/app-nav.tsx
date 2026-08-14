@@ -41,7 +41,7 @@ export function AppNav({ userName, orgName, userType }: AppNavProps) {
       {/* DESKTOP SIDEBAR */}
       <aside className="fixed left-0 top-0 h-full w-64 border-r bg-background hidden md:flex flex-col z-40">
         <div className="border-b px-6 py-4 h-[53px] flex items-center">
-          <span className="text-lg font-semibold">Volunti Panel</span>
+          <span className="font-heading text-lg font-semibold">Volunti Panel</span>
         </div>
 
         <div className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
