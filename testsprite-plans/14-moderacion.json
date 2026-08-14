@@ -1,0 +1,15 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Moderación — Reportar oferta de prueba",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to /registro" },
+    { "type": "action", "description": "Fill out 'Nombre' with 'Moderador QA', 'Correo electrónico' with a random email ending in '@testsprite.test', and 'Contraseña' with 'Test1234!', then submit the form." },
+    { "type": "action", "description": "Select the 'Soy voluntario / particular' card, fill out the P2P onboarding form with alias 'moderador-qa', phone '3000000000', and submit." },
+    { "type": "action", "description": "Navigate to /ofertas" },
+    { "type": "action", "description": "Find an offer (e.g. 'Oferta Especial [TEST]' or any available offer) and click the report (flag) button." },
+    { "type": "assertion", "description": "Verify the report modal appears." },
+    { "type": "action", "description": "Fill out the report reason with '[TEST] Reporte automático de prueba' and submit." },
+    { "type": "assertion", "description": "Verify a success message is shown indicating the report was sent." }
+  ]
+}

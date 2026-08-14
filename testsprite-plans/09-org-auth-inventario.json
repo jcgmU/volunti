@@ -1,0 +1,21 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Org — Registro, Onboarding y CRUD de Inventario",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to /registro" },
+    { "type": "action", "description": "Fill out 'Nombre' with 'TestSprite QA Org', 'Correo electrónico' with a random email ending in '@testsprite.test', and 'Contraseña' with 'Test1234!', then submit the form." },
+    { "type": "assertion", "description": "Verify we are redirected to /elegir-rol" },
+    { "type": "action", "description": "Click on the 'Soy una fundación' card" },
+    { "type": "assertion", "description": "Verify we are on /onboarding" },
+    { "type": "action", "description": "Fill out the organization onboarding form: Name 'TestSprite QA -- ignorar', Phone '3001234567', City 'Bogotá'. Submit the form." },
+    { "type": "assertion", "description": "Verify we are redirected to /app" },
+    { "type": "action", "description": "Navigate to /app/inventario" },
+    { "type": "action", "description": "Click the button to add a new item. Fill name 'Item de Prueba [TEST]', quantity '10', unit 'unidades', Category 'alimentos', and save." },
+    { "type": "assertion", "description": "Verify 'Item de Prueba [TEST]' appears in the inventory list" },
+    { "type": "action", "description": "Click the edit button for 'Item de Prueba [TEST]', change the quantity to '20', and save." },
+    { "type": "assertion", "description": "Verify the item quantity is now 20 in the list" },
+    { "type": "action", "description": "Click the delete button for 'Item de Prueba [TEST]' and confirm the deletion." },
+    { "type": "assertion", "description": "Verify 'Item de Prueba [TEST]' no longer appears in the inventory list" }
+  ]
+}

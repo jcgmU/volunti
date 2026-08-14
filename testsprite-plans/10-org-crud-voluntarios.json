@@ -1,0 +1,18 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Org — CRUD de Voluntarios",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to /registro" },
+    { "type": "action", "description": "Fill out 'Nombre' with 'TestSprite QA Org 2', 'Correo electrónico' with a random email ending in '@testsprite.test', and 'Contraseña' with 'Test1234!', then submit the form." },
+    { "type": "action", "description": "Click on the 'Soy una fundación' card" },
+    { "type": "action", "description": "Fill out the organization onboarding form: Name 'TestSprite QA -- ignorar 2', Phone '3001234567', City 'Bogotá'. Submit the form." },
+    { "type": "action", "description": "Navigate to /app/voluntarios" },
+    { "type": "action", "description": "Click the button to add a new volunteer. Fill name 'Voluntario de Prueba [TEST]', phone '3000000000', check availability for 'rescate', and save." },
+    { "type": "assertion", "description": "Verify 'Voluntario de Prueba [TEST]' appears in the volunteers list" },
+    { "type": "action", "description": "Click the edit button for 'Voluntario de Prueba [TEST]', change the name to 'Voluntario Editado [TEST]', and save." },
+    { "type": "assertion", "description": "Verify the name is now 'Voluntario Editado [TEST]' in the list" },
+    { "type": "action", "description": "Click the delete button for 'Voluntario Editado [TEST]' and confirm the deletion." },
+    { "type": "assertion", "description": "Verify 'Voluntario Editado [TEST]' no longer appears in the volunteers list" }
+  ]
+}

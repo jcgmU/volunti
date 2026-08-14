@@ -1,0 +1,26 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "P2P — Flujo de Solicitud y Aceptación con WhatsApp",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to /registro. Fill out the form with name 'Donante QA', a randomly generated email address, and password 'Test1234!'. Remember this email as 'DonanteEmail'. Submit the form." },
+    { "type": "action", "description": "Select the 'Soy voluntario / particular' card, fill out the P2P onboarding form with alias 'donante-qa', phone '3001111111', and submit." },
+    { "type": "action", "description": "Navigate to /app/donaciones, click to publish a new offer, fill description 'Oferta Especial [TEST]', category 'alimentos', and save." },
+    { "type": "action", "description": "Sign out of the application." },
+    { "type": "action", "description": "Navigate to /registro. Fill out the form with name 'Solicitante QA', a new randomly generated email address, and password 'Test1234!'. Remember this email as 'SolicitanteEmail'. Submit the form." },
+    { "type": "action", "description": "Select the 'Soy voluntario / particular' card, fill out the P2P onboarding form with alias 'solicitante-qa', phone '3002222222', and submit." },
+    { "type": "action", "description": "Navigate to /ofertas, find 'Oferta Especial [TEST]', and click the button to request it." },
+    { "type": "assertion", "description": "Verify a legal modal appears explaining the responsibility of the request" },
+    { "type": "action", "description": "Accept the legal modal terms and submit the request with a message 'Necesito esta oferta de prueba'" },
+    { "type": "action", "description": "Sign out of the application." },
+    { "type": "action", "description": "Navigate to /login. Log in using the 'DonanteEmail' you remembered earlier and password 'Test1234!'." },
+    { "type": "action", "description": "Navigate to /app/donaciones/solicitudes." },
+    { "type": "assertion", "description": "Verify the request for 'Oferta Especial [TEST]' from 'solicitante-qa' appears in the list." },
+    { "type": "action", "description": "Accept the request." },
+    { "type": "action", "description": "Sign out of the application." },
+    { "type": "action", "description": "Navigate to /login. Log in using the 'SolicitanteEmail' you remembered earlier and password 'Test1234!'." },
+    { "type": "action", "description": "Navigate to /app/mis-solicitudes." },
+    { "type": "assertion", "description": "Verify 'Oferta Especial [TEST]' appears as accepted." },
+    { "type": "assertion", "description": "Verify the WhatsApp button with the donor's phone number is now visible." }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Seguridad — Rutas protegidas redirigen correctamente",
+  "planSteps": [
+    { "type": "action", "description": "Ensure you are completely logged out." },
+    { "type": "action", "description": "Navigate directly to /app" },
+    { "type": "assertion", "description": "Verify we are redirected to /login" },
+    { "type": "action", "description": "Navigate directly to /app/inventario" },
+    { "type": "assertion", "description": "Verify we are redirected to /login" },
+    { "type": "action", "description": "Navigate directly to /onboarding" },
+    { "type": "assertion", "description": "Verify we are redirected to /login" },
+    { "type": "action", "description": "Navigate directly to /onboarding/p2p" },
+    { "type": "assertion", "description": "Verify we are redirected to /login" }
+  ]
+}

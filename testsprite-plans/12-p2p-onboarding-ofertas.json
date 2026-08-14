@@ -1,0 +1,19 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "P2P — Onboarding, creación de ofertas y visibilidad pública",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to /registro" },
+    { "type": "action", "description": "Fill out 'Nombre' with 'TestSprite QA Donante', 'Correo electrónico' with a random email ending in '@testsprite.test', and 'Contraseña' with 'Test1234!', then submit the form." },
+    { "type": "action", "description": "Click on the 'Soy voluntario / particular' card" },
+    { "type": "action", "description": "Fill out the P2P onboarding form: Alias 'qa-testsprite-donante', Phone '3001234567'. Submit the form." },
+    { "type": "assertion", "description": "Verify we are redirected to /app" },
+    { "type": "action", "description": "Navigate to /app/donaciones" },
+    { "type": "action", "description": "Click the button to publish a new offer. Fill description 'Oferta de Prueba [TEST]', category 'ropa', availability up to a future date, and save." },
+    { "type": "assertion", "description": "Verify 'Oferta de Prueba [TEST]' appears in the personal donations list" },
+    { "type": "action", "description": "Sign out of the application." },
+    { "type": "action", "description": "Navigate to /ofertas" },
+    { "type": "assertion", "description": "Verify 'Oferta de Prueba [TEST]' appears in the public offers list" },
+    { "type": "assertion", "description": "Verify the phone number '3001234567' DOES NOT appear anywhere on the public offers page" }
+  ]
+}

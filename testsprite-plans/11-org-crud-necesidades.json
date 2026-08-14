@@ -1,0 +1,20 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Org — CRUD de Necesidades y visibilidad en Panorama",
+  "planSteps": [
+    { "type": "action", "description": "Navigate to /registro" },
+    { "type": "action", "description": "Fill out 'Nombre' with 'TestSprite QA Org 3', 'Correo electrónico' with a random email ending in '@testsprite.test', and 'Contraseña' with 'Test1234!', then submit the form." },
+    { "type": "action", "description": "Click on the 'Soy una fundación' card" },
+    { "type": "action", "description": "Fill out the organization onboarding form: Name 'TestSprite QA -- ignorar 3', Phone '3001234567', City 'Bogotá'. Submit the form." },
+    { "type": "action", "description": "Navigate to /app/necesidades" },
+    { "type": "action", "description": "Click the button to add a new need. Fill description '[TEST] no es una necesidad real', category 'alimentos', quantity '50', unit 'unidades', urgency 'media', and save." },
+    { "type": "assertion", "description": "Verify '[TEST] no es una necesidad real' appears in the needs list" },
+    { "type": "action", "description": "Navigate to /panorama" },
+    { "type": "action", "description": "Select the 'Necesidades' tab if it's not already active" },
+    { "type": "assertion", "description": "Verify '[TEST] no es una necesidad real' appears in the public panorama list" },
+    { "type": "action", "description": "Navigate back to /app/necesidades" },
+    { "type": "action", "description": "Click the delete button for '[TEST] no es una necesidad real' and confirm the deletion." },
+    { "type": "assertion", "description": "Verify '[TEST] no es una necesidad real' no longer appears in the needs list" }
+  ]
+}
