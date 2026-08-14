@@ -8,6 +8,7 @@ import { RequestButton } from './components/request-button'
 import { ReportButton } from './components/report-button'
 import { Button } from '@/components/ui/button'
 import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 
 const CATEGORY_LABELS: Record<string, string> = {
   alimentos: 'Alimentos',
@@ -238,8 +239,8 @@ export default async function OfertasPage({ searchParams }: PageProps) {
             ))}
           </div>
         )}
-
       </main>
+      <SiteFooter />
     </div>
   )
 }

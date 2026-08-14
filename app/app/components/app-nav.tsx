@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Package, Users, Megaphone, LogOut, Gift, Inbox } from 'lucide-react'
+import { LogOut, Gift, Inbox, Home, Package, Users, Megaphone } from 'lucide-react'
 import { signOut } from 'next-auth/react'
+import { DeviaCredit } from '@/components/devia-credit'
 
 interface AppNavProps {
   userName: string
@@ -75,6 +76,9 @@ export function AppNav({ userName, orgName, userType }: AppNavProps) {
             <LogOut className="w-5 h-5" />
             Cerrar sesión
           </button>
+          <div className="pt-2 px-3">
+            <DeviaCredit compact />
+          </div>
         </div>
       </aside>
 

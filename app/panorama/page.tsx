@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 import {
   parseFilters,
   CATEGORY_LABELS,
@@ -288,6 +289,7 @@ export default async function PanoramaPage({ searchParams }: PageProps) {
           </>
         )}
       </div>
+      <SiteFooter />
     </>
   )
 }

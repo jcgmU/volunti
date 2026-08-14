@@ -5,6 +5,7 @@ import { p2pProfiles } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { P2PForm } from './components/p2p-form'
 import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 
 export default async function P2POnboardingPage() {
   const session = await auth()
@@ -36,6 +37,7 @@ export default async function P2POnboardingPage() {
           <P2PForm />
         </div>
       </div>
+      <SiteFooter />
     </>
   )
 }

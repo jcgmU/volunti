@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 import { OnboardingForm } from './components/onboarding-form'
 import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 
 interface PageProps {
   searchParams: Promise<{ error?: string }>
@@ -27,6 +28,7 @@ export default async function OnboardingPage({ searchParams }: PageProps) {
           <OnboardingForm error={params.error} />
         </div>
       </div>
+      <SiteFooter />
     </>
   )
 }

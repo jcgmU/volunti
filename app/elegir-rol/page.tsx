@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Building2, HeartHandshake } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 
 export default function ElegirRolPage() {
   return (
@@ -42,6 +43,7 @@ export default function ElegirRolPage() {
           </div>
         </div>
       </div>
+      <SiteFooter />
     </>
   )
 }
