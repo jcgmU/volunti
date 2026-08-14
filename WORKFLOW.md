@@ -1,9 +1,26 @@
 # Workflow del proyecto Volunti
 
 ## Roles
-- **Orquestador (Claude):** coordina el trabajo, habla con Cami, es dueño de todo lo que sea Vercel. No escribe código.
+- **Orquestador (Claude):** coordina el trabajo, habla con Cami, es dueño de todo lo que sea Vercel. No escribe código, y desde el checkpoint de tipografía/TestSprite **tampoco vuelve a correr lint/tsc/build ni revisa el diff línea por línea** — eso es responsabilidad de agy (ver "Autoverificación obligatoria" abajo). El orquestador confirma el resultado en producción (deployment READY en Vercel, contenido en vivo esperado) y pide revertir si algo sale mal, pero el gate de calidad/seguridad pre-push vive en agy para ahorrar tokens del orquestador.
 - **Planificador (Kimi):** diseña los planes concretos de cada checkpoint/feature y los despacha directo a agy por Herdr. Reemplaza a OpenCode como planificador principal (OpenCode queda como fallback histórico si Kimi no está disponible).
-- **Constructor (agy):** ejecuta los planes en el repo y le reporta el resultado al orquestador.
+- **Constructor (agy):** ejecuta los planes en el repo, se autoverifica (build/lint/tsc + revisión de seguridad de su propio diff), diseña y corre los tests de TestSprite relevantes, **pushea a producción él mismo**, y recién ahí le reporta el resultado completo al orquestador.
+
+## Autoverificación obligatoria de agy (antes de cualquier push)
+Esto es una directiva permanente, no algo que haya que repetirle en cada tarea. Antes de pushear CUALQUIER cambio, agy debe completar en orden:
+
+1. `npm run lint && npx tsc --noEmit && npm run build` — los tres limpios (0 errores; warnings pre-existentes conocidos como el de `next/image` en `devia-credit.tsx` son aceptables, warnings nuevos no).
+2. **Revisión de seguridad del propio diff** (`git diff`) antes de commitear, buscando específicamente:
+   - En toda mutación (insert/update/delete) nueva o tocada: el ID del dueño sale de `session.user.id` vía `auth()`, nunca de un input del cliente.
+   - Patrón de doble ownership-check presente: SELECT pre-check con `and(eq(id,...), eq(ownerField,...))` + el mismo filtro repetido en el WHERE de la mutación.
+   - Ningún campo sensible (teléfono, contraseña, tokens) se selecciona o renderiza fuera del único punto donde está autorizado (ej. el teléfono del donante solo en `/app/mis-solicitudes` cuando `status==='aceptada'`).
+   - `try/catch` con `isRedirectError` en toda server action nueva.
+   - Sin archivos sueltos de debug/verificación commiteados por error (`verify.ts` y similares).
+   - `git status` limpio salvo los archivos realmente tocados por la tarea.
+3. **TestSprite**: correr los tests relevantes al área tocada (`testsprite test run <testId> --wait`), o crear un plan nuevo si la tarea agrega una superficie pública nueva que valga la pena cubrir. Todos en verde antes de seguir.
+4. Recién con 1-3 en verde: `git push origin main`.
+5. Reportar al orquestador (vía herdr) el resultado completo: archivos tocados, resultado de lint/tsc/build, hallazgos de la revisión de seguridad (o confirmación de que no hubo hallazgos), resultado de TestSprite, y el commit SHA ya pusheado.
+
+Si en el paso 2 agy encuentra algo dudoso que no sabe resolver con confianza, no debe pushear — reporta el hallazgo al orquestador y espera instrucción, en vez de decidir solo.
 
 ## Regla de tooling
 
@@ -19,7 +36,7 @@ Todo lo relacionado con Vercel (env vars, deployments, gestión del proyecto) lo
 Reservado solo para lo verdaderamente imposible de automatizar. Antes de agregar algo ahí, confirmar con el orquestador que no existe vía automatizada.
 
 ## Flujo de despacho
-El planificador (Kimi) despacha los planes directo a agy por Herdr una vez diseñados, sin pasar por el orquestador. El orquestador solo recibe un resumen corto del despacho y lee el reporte final directo de agy. El orquestador sigue siendo quien verifica (lint/tsc/build/revisión de seguridad), pushea y confirma en producción — nunca se salta ese paso aunque el ciclo planificador→constructor sea autónomo.
+El planificador (Kimi) despacha los planes directo a agy por Herdr una vez diseñados, sin pasar por el orquestador. agy ejecuta, se autoverifica (ver "Autoverificación obligatoria" arriba) y pushea a producción él mismo. El orquestador recibe el reporte final ya con el push hecho, y su verificación se limita a confirmar en Vercel que el deployment llegó a READY y que el contenido en producción es el esperado — ya no repite build/lint/tsc ni revisa el diff línea por línea salvo que el reporte de agy o el estado de producción indiquen un problema.
 
 ## Skill de diseño: UI UX Pro Max
 Para trabajo de UI/UX (landing page, rediseños, nuevos flujos visuales), tanto el planificador como el constructor deben instalar y usar la skill `ui-ux-pro-max` (https://ui-ux-pro-max-skill.nextlevelbuilder.io/, repo: github.com/nextlevelbuilder/ui-ux-pro-max-skill):
