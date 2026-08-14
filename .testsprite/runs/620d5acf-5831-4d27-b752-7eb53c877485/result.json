@@ -1,0 +1,20 @@
+{
+  "testId": "8f6b161c-81ec-4cc1-b6ca-22165e913832",
+  "status": "failed",
+  "startedAt": null,
+  "finishedAt": "2026-08-14T23:42:48.290Z",
+  "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20260814-234245-698743d2.webm",
+  "failureAnalysisUrl": null,
+  "snapshotId": "snap_55cc1dd7481e57ba",
+  "runIdIfAvailable": "620d5acf-5831-4d27-b752-7eb53c877485",
+  "codeVersion": null,
+  "targetUrl": null,
+  "targetUrlSource": null,
+  "failedStepIndex": 1,
+  "failureKind": "timeout",
+  "verdict": "failed",
+  "executionStatus": "completed",
+  "summary": "Failed (timeout): The production host appears to be serving a different route than the test expects: instead of ending on `/app`, it redirects/lands on `/ofertas` (and briefly `/login`). This usually indicates a hosting-side routing or redirect configuration mismatch—such as a stale deployment, incorrect Vercel redirects/rewrites, or app logic that derives the destination route incorrectly in production. Underlying error: Page URL expected to be 're.compile('/app')'\nActual value: https://volunt…",
+  "apiOutput": null,
+  "trace": null
+}

@@ -1,0 +1,9 @@
+{
+  "rootCauseHypothesis": "The page under test did not expose the expected anchor element a[href=\"/onboarding/p2p\"] before the timeout, likely because the onboarding UI is not rendering correctly on the host. Common hosting-side causes include a broken deployment, JS hydration/render failure, slow or blocked asset/API loading, auth/feature-flag conditions that suppress the link, or a route/path change that removed or renamed the expected link. Underlying error: TimeoutError: Locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"a[href=\\\"/onboarding/p2p\\\"]\")",
+  "recommendedFixTarget": {
+    "kind": "selector",
+    "reference": "[href=\\\"/onboarding/p2p\\\"]",
+    "rationale": "Ensure the onboarding page renders a clickable anchor with href='/onboarding/p2p' within 10 seconds, or update the route/link target if it changed. Check for broken client-side rendering/hydration, auth/feature-flag gating, A/B tests, or redirects that prevent the link from appearing. If the page is dynamically loaded, reduce blocking requests and avoid hiding the link behind late-loading scripts; if the path changed, restore the old route or provide a backward-compatible link."
+  },
+  "evidence": []
+}

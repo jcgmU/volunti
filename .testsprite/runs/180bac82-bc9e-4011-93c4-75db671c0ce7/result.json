@@ -1,0 +1,20 @@
+{
+  "testId": "8f6b161c-81ec-4cc1-b6ca-22165e913832",
+  "status": "failed",
+  "startedAt": null,
+  "finishedAt": "2026-08-14T23:38:55.214Z",
+  "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20260814-233852-b5a95a5d.webm",
+  "failureAnalysisUrl": null,
+  "snapshotId": "snap_cb5a153961808a92",
+  "runIdIfAvailable": "180bac82-bc9e-4011-93c4-75db671c0ce7",
+  "codeVersion": null,
+  "targetUrl": null,
+  "targetUrlSource": null,
+  "failedStepIndex": 1,
+  "failureKind": "timeout",
+  "verdict": "failed",
+  "executionStatus": "completed",
+  "summary": "Failed (timeout): The page under test did not expose the expected anchor element a[href=\"/onboarding/p2p\"] before the timeout, likely because the onboarding UI is not rendering correctly on the host. Common hosting-side causes include a broken deployment, JS hydration/render failure, slow or blocked asset/API loading, auth/feature-flag conditions that suppress the link, or a route/path change that removed or renamed the expected link. Underlying error: TimeoutError: Locator.click: Timeout 10000…",
+  "apiOutput": null,
+  "trace": null
+}

@@ -1,0 +1,9 @@
+{
+  "rootCauseHypothesis": "The production host appears to be serving a different route than the test expects: instead of ending on `/app`, it redirects/lands on `/ofertas` (and briefly `/login`). This usually indicates a hosting-side routing or redirect configuration mismatch—such as a stale deployment, incorrect Vercel redirects/rewrites, or app logic that derives the destination route incorrectly in production. Underlying error: Page URL expected to be 're.compile('/app')'\nActual value: https://volunti.vercel.app/ofertas \nCall log:\n  - PageAssertions.to_have_url with timeout 15000ms\n  -   - waiting for locator(\":root\")\n  -     3 × locator resolved to <html lang=\"es\">…</html>\n  -       - unexpected value \"https://volunti.vercel.app/login\"\n  -     16 × locator resolved to <html lang=\"es\">…</html>\n  -        - unexpected value \"https://volunti.vercel.app/ofertas\"",
+  "recommendedFixTarget": {
+    "kind": "selector",
+    "reference": ".compile",
+    "rationale": "Ensure the app’s post-login/post-navigation route resolves to `/app` instead of `/ofertas` on production hosting. Check any auth middleware, redirects, or server-side route rewrites on Vercel that may be sending users from `/login` or root to `/ofertas`. If `/app` is the expected canonical path, add/restore a redirect from `/ofertas` to `/app`, and verify that client-side routing and SSR agree on the same base path. Also confirm the deployment includes the correct latest build and that environment-specific redirect rules are not overriding the intended route."
+  },
+  "evidence": []
+}

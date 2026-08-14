@@ -27,7 +27,7 @@ export async function signUpAction(formData: FormData) {
     redirect('/registro?error=invalid');
   }
 
-  const rateLimit = await checkRateLimit('signup', 5, 60);
+  const rateLimit = await checkRateLimit('signup', 20, 60);
   if (!rateLimit.success) {
     redirect('/registro?error=ratelimit');
   }
