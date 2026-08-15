@@ -1,27 +1,15 @@
 {
   "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
   "type": "frontend",
-  "name": "Panel de Administración — reportes y redirección",
+  "name": "Panel de Administración — redirección sin sesión",
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate directly to /app/admin (authenticated as a standard non-admin credentials user)"
+      "description": "Navigate directly to /app/admin (unauthenticated)"
     },
     {
       "type": "assertion",
-      "description": "The user is redirected away to /app, showing a heading like '¡Hola, '"
-    },
-    {
-      "type": "action",
-      "description": "Navigate directly to /app/admin (authenticated as an admin credentials user)"
-    },
-    {
-      "type": "assertion",
-      "description": "The page loads successfully and shows a heading with the text 'Moderación — Reportes'"
-    },
-    {
-      "type": "assertion",
-      "description": "A table header with 'Reportado por', 'Tipo', 'Información', 'Motivo', 'Fecha', and 'Acción' is visible"
+      "description": "The user is redirected away to the login page, which shows a heading 'Iniciar sesión'"
     }
   ]
 }

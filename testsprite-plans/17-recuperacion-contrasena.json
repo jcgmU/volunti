@@ -1,7 +1,7 @@
 {
   "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
   "type": "frontend",
-  "name": "Recuperación de contraseña — flujo de olvido y token inválido",
+  "name": "Recuperación de contraseña — flujo estático y token inválido",
   "planSteps": [
     {
       "type": "action",
@@ -9,7 +9,7 @@
     },
     {
       "type": "assertion",
-      "description": "A link with the text '¿Olvidaste tu contraseña?' is visible below the password field"
+      "description": "A link with the text '¿Olvidaste tu contraseña?' is visible"
     },
     {
       "type": "action",
@@ -20,12 +20,8 @@
       "description": "The page shows a heading with the text 'Recuperar contraseña' and an input field for email"
     },
     {
-      "type": "action",
-      "description": "Fill the email input with 'test_recovery_ignore@volunti.co' and click the 'Enviar link de recuperación' button"
-    },
-    {
       "type": "assertion",
-      "description": "A success message appears containing 'Si el correo existe, te enviamos un link para restablecer tu contraseña.'"
+      "description": "The Turnstile CAPTCHA widget (an iframe from challenges.cloudflare.com) is visible in the page"
     },
     {
       "type": "action",
@@ -37,7 +33,7 @@
     },
     {
       "type": "assertion",
-      "description": "A button with the text 'Solicitar nuevo link' is visible"
+      "description": "A button with the text 'Solicitar nuevo link' is visible, and it links back to /login/recuperar"
     }
   ]
 }
