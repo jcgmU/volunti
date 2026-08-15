@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/db';
-import { users, p2pProfiles } from '@/db/schema';
+import { users, p2pProfiles, emailVerificationTokens, passwordResetTokens } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { signUpSchema } from '@/lib/validations';
@@ -10,6 +10,8 @@ import { redirect } from 'next/navigation';
 import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import { checkRateLimit, recordRateLimit } from '@/lib/rate-limit';
 import { verifyTurnstileToken } from '@/lib/turnstile';
+import { sendEmail } from '@/lib/email';
+import { randomUUID } from 'crypto';
 
 export async function signUpAction(formData: FormData) {
   const name = formData.get('name') as string;
@@ -44,12 +46,39 @@ export async function signUpAction(formData: FormData) {
 
     const hashedPassword = await bcrypt.hash(parsed.data.password, 10);
 
-    await db.insert(users).values({
+    const [newUser] = await db.insert(users).values({
       name: parsed.data.name,
       email: parsed.data.email,
       passwordHash: hashedPassword,
       authProvider: 'credentials',
       organizationId: null,
+    }).returning({ id: users.id });
+
+    if (!newUser) {
+      redirect('/registro?error=unknown');
+    }
+
+    const verificationToken = randomUUID();
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 24);
+
+    await db.insert(emailVerificationTokens).values({
+      userId: newUser.id,
+      token: verificationToken,
+      expiresAt,
+    });
+
+    await sendEmail({
+      to: parsed.data.email,
+      subject: 'Verificá tu correo electrónico — Volunti',
+      html: `<div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
+        <h2 style="color: #111;">Verificá tu correo electrónico</h2>
+        <p>Gracias por registrarte en Volunti. Para completar tu registro, hacé clic en el siguiente link:</p>
+        <p style="margin: 24px 0;">
+          <a href="https://volunti.co/verificar-email?token=${verificationToken}" style="display: inline-block; padding: 12px 24px; background: #111; color: #fff; text-decoration: none; border-radius: 6px;">Verificar mi correo</a>
+        </p>
+        <p style="color: #666; font-size: 14px;">Si no te registraste en Volunti, podés ignorar este mensaje. El link expira en 24 horas.</p>
+      </div>`,
     });
   } catch (error) {
     if (isRedirectError(error)) {
@@ -137,5 +166,84 @@ export async function signInWithGoogle() {
       throw error;
     }
     redirect('/login?error=unknown');
+  }
+}
+
+export async function requestPasswordResetAction(formData: FormData) {
+  const email = formData.get('email') as string;
+  const token = formData.get('cf-turnstile-response') as string | null;
+
+  const isHuman = await verifyTurnstileToken(token);
+  if (!isHuman) {
+    return { success: false, error: 'Por favor, completa el CAPTCHA para continuar.' };
+  }
+
+  const rateLimit = await checkRateLimit('password_reset_request', 5, 60);
+  if (!rateLimit.success) {
+    return { success: false, error: rateLimit.message || 'Demasiados intentos. Por favor, intenta de nuevo más tarde.' };
+  }
+
+  const [existingUser] = await db.select().from(users).where(eq(users.email, email));
+  
+  if (existingUser) {
+    const resetToken = randomUUID();
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 1);
+
+    await db.insert(passwordResetTokens).values({
+      email,
+      token: resetToken,
+      expiresAt,
+    });
+
+    await sendEmail({
+      to: email,
+      subject: 'Restablecer contraseña — Volunti',
+      html: `<div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
+        <h2 style="color: #111;">Restablecer contraseña</h2>
+        <p>Recibimos una solicitud para restablecer tu contraseña en Volunti. Si fuiste vos, hacé clic en el siguiente link:</p>
+        <p style="margin: 24px 0;">
+          <a href="https://volunti.co/login/resetear?token=${resetToken}" style="display: inline-block; padding: 12px 24px; background: #111; color: #fff; text-decoration: none; border-radius: 6px;">Crear nueva contraseña</a>
+        </p>
+        <p style="color: #666; font-size: 14px;">Si no solicitaste este cambio, podés ignorar este mensaje. El link expira en 1 hora.</p>
+      </div>`,
+    });
+  }
+
+  // Always return success to not reveal if email exists
+  return { success: true };
+}
+
+export async function resetPasswordAction(token: string, password: string) {
+  try {
+    const [record] = await db
+      .select()
+      .from(passwordResetTokens)
+      .where(eq(passwordResetTokens.token, token));
+
+    if (!record) {
+      return { success: false, error: 'Link inválido o expirado. Por favor, solicita uno nuevo.' };
+    }
+
+    const now = new Date();
+    if (record.expiresAt < now) {
+      return { success: false, error: 'Link inválido o expirado. Por favor, solicita uno nuevo.' };
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await db
+      .update(users)
+      .set({ passwordHash: hashedPassword })
+      .where(eq(users.email, record.email));
+
+    await db
+      .delete(passwordResetTokens)
+      .where(eq(passwordResetTokens.id, record.id));
+
+    return { success: true };
+  } catch (error) {
+    console.error('Reset password error:', error);
+    return { success: false, error: 'Algo salió mal. Por favor, intenta de nuevo.' };
   }
 }

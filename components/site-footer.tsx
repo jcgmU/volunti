@@ -18,6 +18,9 @@ export async function SiteFooter() {
               <Link href="/registro" className="hover:text-foreground transition-colors">Registro</Link>
             </>
           )}
+          <a href="mailto:jcgm1047@gmail.com?subject=Soporte%20Volunti" className="hover:text-foreground transition-colors">Soporte</a>
+          <Link href="/privacidad" className="hover:text-foreground transition-colors">Privacidad</Link>
+          <Link href="/terminos" className="hover:text-foreground transition-colors">Términos</Link>
         </div>
       </div>
       <div className="mx-auto w-full max-w-6xl px-4 mt-4 pt-4 border-t">

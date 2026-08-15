@@ -24,6 +24,8 @@ export const users = pgTable('users', {
   passwordHash: text('password_hash'),
   authProvider: text('auth_provider', { enum: ['google', 'credentials'] }).notNull(),
   organizationId: uuid('organization_id').references(() => organizations.id),
+  emailVerified: timestamp('email_verified', { withTimezone: true }),
+  isAdmin: boolean('is_admin').notNull().default(false),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -118,6 +120,22 @@ export const p2pReports = pgTable('p2p_reports', {
   targetType: text('target_type').notNull(), // 'offer' or 'profile'
   targetId: uuid('target_id').notNull(),
   reason: text('reason').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const emailVerificationTokens = pgTable('email_verification_tokens', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => users.id),
+  token: text('token').notNull().unique(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const passwordResetTokens = pgTable('password_reset_tokens', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  email: text('email').notNull(),
+  token: text('token').notNull().unique(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 

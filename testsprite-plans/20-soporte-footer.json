@@ -1,0 +1,23 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Footer — Enlaces de soporte y legales",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate directly to / (landing page)"
+    },
+    {
+      "type": "assertion",
+      "description": "The footer contains a link with the text 'Soporte' and its href starts with 'mailto:jcgm1047@gmail.com'"
+    },
+    {
+      "type": "assertion",
+      "description": "The footer contains a link with the text 'Privacidad' and its href is '/privacidad'"
+    },
+    {
+      "type": "assertion",
+      "description": "The footer contains a link with the text 'Términos' and its href is '/terminos'"
+    }
+  ]
+}

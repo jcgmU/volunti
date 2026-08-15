@@ -1,0 +1,43 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Recuperación de contraseña — flujo de olvido y token inválido",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate directly to /login"
+    },
+    {
+      "type": "assertion",
+      "description": "A link with the text '¿Olvidaste tu contraseña?' is visible below the password field"
+    },
+    {
+      "type": "action",
+      "description": "Navigate directly to /login/recuperar"
+    },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading with the text 'Recuperar contraseña' and an input field for email"
+    },
+    {
+      "type": "action",
+      "description": "Fill the email input with 'test_recovery_ignore@volunti.co' and click the 'Enviar link de recuperación' button"
+    },
+    {
+      "type": "assertion",
+      "description": "A success message appears containing 'Si el correo existe, te enviamos un link para restablecer tu contraseña.'"
+    },
+    {
+      "type": "action",
+      "description": "Navigate directly to /login/resetear?token=invalido"
+    },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading 'Error' and an error message containing 'Link inválido o expirado.'"
+    },
+    {
+      "type": "assertion",
+      "description": "A button with the text 'Solicitar nuevo link' is visible"
+    }
+  ]
+}

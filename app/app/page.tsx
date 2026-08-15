@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import { db } from '@/db'
 import { p2pProfiles } from '@/db/schema'
 import { eq } from 'drizzle-orm'
+import { EmailVerificationBanner } from './components/email-verification-banner'
 
 interface PageProps {
   searchParams: Promise<{ onboarded?: string, error?: string }>
@@ -27,6 +28,7 @@ export default async function AppPage({ searchParams }: PageProps) {
   const showOnboardedSuccess = params.onboarded === '1'
   const showOnboardingBanner = session.user.organizationId === null && !hasP2pProfile
   const showBlockedBanner = params.error === 'blocked'
+  const showEmailVerificationBanner = session.user.authProvider === 'credentials' && !session.user.emailVerified
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 px-4 text-center">
@@ -61,6 +63,9 @@ export default async function AppPage({ searchParams }: PageProps) {
             </Link>
           </div>
         )}
+
+        {/* Banner de Verificación de Email no bloqueante */}
+        {showEmailVerificationBanner && <EmailVerificationBanner />}
 
         <div className="space-y-6 w-full mt-2">
           <h1 className="text-3xl font-bold">¡Hola, {session.user.name}!</h1>

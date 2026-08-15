@@ -1,0 +1,36 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Verificación de email — flujo post-registro y verificación de token",
+  "planSteps": [
+    { "type": "action", "description": "Navigate directly to /registro" },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading with the text 'Crear una cuenta'"
+    },
+    {
+      "type": "action",
+      "description": "Navigate directly to /app (authenticated as a credentials user without emailVerified)"
+    },
+    {
+      "type": "assertion",
+      "description": "A yellow banner with the text 'Verificá tu correo electrónico para mayor seguridad.' is visible"
+    },
+    {
+      "type": "assertion",
+      "description": "A button with the text 'Reenviar email' is visible inside the banner"
+    },
+    {
+      "type": "action",
+      "description": "Navigate directly to /verificar-email?token=invalido"
+    },
+    {
+      "type": "assertion",
+      "description": "The page shows an error message containing 'Token inválido o expirado'"
+    },
+    {
+      "type": "assertion",
+      "description": "A button with the text 'Reenviar email de verificación' is visible"
+    }
+  ]
+}

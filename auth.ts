@@ -11,12 +11,16 @@ declare module 'next-auth' {
   interface User {
     authProvider?: 'google' | 'credentials';
     organizationId?: string | null;
+    emailVerified?: Date | null;
+    isAdmin?: boolean;
   }
   interface Session {
     user: {
       id: string;
       authProvider: 'google' | 'credentials';
       organizationId: string | null;
+      emailVerified: Date | null;
+      isAdmin: boolean;
     } & DefaultSession['user']
   }
 }
@@ -66,6 +70,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             authProvider: 'google',
             passwordHash: null,
             organizationId: null,
+            emailVerified: new Date(),
           });
         }
       }
@@ -83,14 +88,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           token.email = dbUser.email;
           token.authProvider = dbUser.authProvider;
           token.organizationId = dbUser.organizationId;
+          token.emailVerified = dbUser.emailVerified;
+          token.isAdmin = dbUser.isAdmin;
         }
-      } else if (!token.organizationId) {
+      } else {
         const [dbUser] = await db
           .select()
           .from(users)
           .where(eq(users.id, token.id as string));
-        if (dbUser && dbUser.organizationId) {
-          token.organizationId = dbUser.organizationId;
+        if (dbUser) {
+          if (dbUser.organizationId) {
+            token.organizationId = dbUser.organizationId;
+          }
+          token.emailVerified = dbUser.emailVerified;
+          token.isAdmin = dbUser.isAdmin;
         }
       }
       return token;
@@ -102,6 +113,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.email = token.email as string;
         session.user.authProvider = token.authProvider as 'google' | 'credentials';
         session.user.organizationId = token.organizationId as string | null;
+        session.user.emailVerified = token.emailVerified as Date | null;
+        session.user.isAdmin = token.isAdmin as boolean;
       }
       return session;
     },

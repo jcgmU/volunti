@@ -1,0 +1,31 @@
+{
+  "projectId": "9309ebd8-c401-49ed-8024-1b702a694c7b",
+  "type": "frontend",
+  "name": "Páginas legales — Privacidad y Términos",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate directly to /privacidad"
+    },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading with the text 'Política de Privacidad'"
+    },
+    {
+      "type": "assertion",
+      "description": "A note about AI assistance is visible containing 'Este documento fue generado con asistencia de IA'"
+    },
+    {
+      "type": "action",
+      "description": "Navigate directly to /terminos"
+    },
+    {
+      "type": "assertion",
+      "description": "The page shows a heading with the text 'Términos y Condiciones'"
+    },
+    {
+      "type": "assertion",
+      "description": "A note about AI assistance is visible containing 'Este documento fue generado con asistencia de IA'"
+    }
+  ]
+}
